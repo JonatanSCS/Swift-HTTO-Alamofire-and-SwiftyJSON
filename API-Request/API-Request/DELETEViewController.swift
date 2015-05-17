@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+
 
 
 class DELETEViewController: UIViewController {
@@ -18,7 +18,7 @@ class DELETEViewController: UIViewController {
     
     
  func alamoGET(){
-    Alamofire.request(.GET, "http://172.17.4.232:3000/tshirts")
+    Alamofire.request(.GET, "http://localhost:3000:3000/tshirts")
         .responseJSON {(request, response, JSON, error) in
                 
           if let data = JSON as? NSArray {
@@ -28,7 +28,7 @@ class DELETEViewController: UIViewController {
                 
                 self.delete_ID_label.text = id as String
                 
-                Alamofire.request(.DELETE, "http://172.17.4.232:3000/tshirt/\(id)")
+                Alamofire.request(.DELETE, "http://localhost:3000/tshirt/\(id)")
                   .responseJSON {(request, response, JSON, error) in
                     println("Proceso Completado")
                 }

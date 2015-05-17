@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+
 
 
 class GETViewController: UIViewController {
@@ -29,7 +29,7 @@ class GETViewController: UIViewController {
     
     func alamoGET() {
         
-        Alamofire.request(.GET, "http://172.17.4.232:3000/tshirt/5553d5db3a3519790f000007")
+        Alamofire.request(.GET, "http://localhost:3000/tshirt/5553d5db3a3519790f000007")
             .responseJSON {(request, response, JSON, error) in
                 //println(JSON)
                 

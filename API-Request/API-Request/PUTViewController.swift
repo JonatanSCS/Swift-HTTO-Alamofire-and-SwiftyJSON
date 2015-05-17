@@ -32,7 +32,7 @@ class PUTViewController: UIViewController, UITextFieldDelegate {
     func alamoPUT() {
         
         let parameters_put = ["model": modelText.text, "price": priceText.text, "style": styleText.text, "size": sizeText.text, "colour": colourText.text, "summary": summaryText.text]
-        Alamofire.request(.PUT, "http://localhost:3000:3000/tshirt/5553d5db3a3519790f000007", parameters:parameters_put, encoding: .JSON) .responseJSON {
+        Alamofire.request(.PUT, "http://localhost:3000/tshirt/5553d5db3a3519790f000007", parameters:parameters_put, encoding: .JSON) .responseJSON {
             (request, response, JSON, error) in
             println(JSON)
         }

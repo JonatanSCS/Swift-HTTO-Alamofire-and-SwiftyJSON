@@ -33,7 +33,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     func alamoPOST(){
         let parameter = ["model": modelText.text, "price": styleText.text, "style": sizeText.text, "size": colourText.text, "colour": colourText.text, "summary": summaryText.text]
         
-        Alamofire.request(.POST, "http://localhost:3000:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+        Alamofire.request(.POST, "http://localhost:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
             (request, response, JSON, error) in
             //println(JSON)
         }

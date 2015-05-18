@@ -29,6 +29,9 @@ class PUTViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
+    
+    //For iOS device test change localhost:3000 to IP Direction
+    
     func alamoPUT() {
         
         let parameters_put = ["model": modelText.text, "price": priceText.text, "style": styleText.text, "size": sizeText.text, "colour": colourText.text, "summary": summaryText.text]

@@ -29,6 +29,8 @@ class GETViewController: UIViewController {
     
     func alamoGET() {
         
+        
+        //For iOS device test change localhost:3000 to IP Direction
         Alamofire.request(.GET, "http://localhost:3000/tshirt/5553d5db3a3519790f000007")
             .responseJSON {(request, response, JSON, error) in
                 //println(JSON)

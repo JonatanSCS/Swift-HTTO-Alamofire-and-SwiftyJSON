@@ -17,6 +17,8 @@ class DELETEViewController: UIViewController {
     @IBOutlet var delete_ID_label: UILabel!
     
     
+    //For iOS device test change localhost:3000 to IP Direction
+    
  func alamoGET(){
     Alamofire.request(.GET, "http://localhost:3000/tshirts")
         .responseJSON {(request, response, JSON, error) in

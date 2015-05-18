@@ -30,6 +30,8 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    //For iOS device test change localhost:3000 to IP Direction
+    
     func alamoPOST(){
         let parameter = ["model": modelText.text, "price": styleText.text, "style": sizeText.text, "size": colourText.text, "colour": colourText.text, "summary": summaryText.text]
         

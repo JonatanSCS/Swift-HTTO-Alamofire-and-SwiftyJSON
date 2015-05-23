@@ -45,13 +45,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
         alamoPOST()
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

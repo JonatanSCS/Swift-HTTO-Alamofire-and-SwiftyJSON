@@ -11,6 +11,7 @@ import Alamofire
 
 class PUTViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet var putErrorLabel: UILabel!
     @IBOutlet var modelText: UITextField!
     @IBOutlet var styleText: UITextField!
     @IBOutlet var sizeText: UITextField!
@@ -34,12 +35,38 @@ class PUTViewController: UIViewController, UITextFieldDelegate {
     
     func alamoPUT() {
         
-        let parameters_put = ["model": modelText.text, "price": priceText.text, "style": styleText.text, "size": sizeText.text, "colour": colourText.text, "summary": summaryText.text]
-        Alamofire.request(.PUT, "http://localhost:3000/tshirt/5553d5db3a3519790f000007", parameters:parameters_put, encoding: .JSON) .responseJSON {
+        //For iOS device test change localhost:3000 to IP Direction
+        Alamofire.request(.GET, "http://localhost:3000/tshirts")
+            .responseJSON {(request, response, Tshirts, error) in
+        //println(JSON)
+            let json = JSON(Tshirts!)
+                
+            if json.count >= 1{
+                let id = json[0]["_id"]
+                println(id)
+        
+                let parameters_put = ["model": self.modelText.text, "price": self.priceText.text, "style": self.styleText.text, "size": self.sizeText.text, "colour": self.colourText.text, "summary": self.summaryText.text]
+        
+        
+                Alamofire.request(.PUT, "http://localhost:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
             (request, response, JSON, error) in
-            println(JSON)
+                    println(JSON)
+            
+            
+                }
+                }
+
+        
+            else {
+                println("No hay playeras")
+                self.putErrorLabel.text = "No hay playeras"
+                self.putErrorLabel.textColor = UIColor.blackColor()
+            }
         }
     }
+    
+    
+    
     
     @IBAction func send_PUTbutton(sender: AnyObject) {
         alamoPUT()

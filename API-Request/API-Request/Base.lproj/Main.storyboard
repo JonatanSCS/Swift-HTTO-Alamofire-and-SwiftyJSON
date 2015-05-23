@@ -124,12 +124,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9mu-HR-wLL">
+                                <rect key="frame" x="26" y="93" width="258" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="IT2-qi-ncn"/>
                     <connections>
                         <outlet property="colourLabel" destination="S3E-Th-r4i" id="oCr-1v-bYZ"/>
+                        <outlet property="errorLabel" destination="9mu-HR-wLL" id="kqL-Ji-Lya"/>
                         <outlet property="idLabel" destination="PXk-8A-DMb" id="aPc-FB-AWz"/>
                         <outlet property="modelLabel" destination="0YF-Um-n5D" id="fJQ-rG-eaR"/>
                         <outlet property="modifiedLabel" destination="jks-Cz-Hv8" id="efq-kZ-Df3"/>
@@ -503,6 +511,13 @@
                                     <action selector="send_PUTbutton:" destination="4oO-RR-BGq" eventType="touchUpInside" id="osd-ej-Qxs"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L5V-1G-aRX">
+                                <rect key="frame" x="46" y="501" width="258" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -511,6 +526,7 @@
                         <outlet property="colourText" destination="jZT-AU-8V5" id="cwz-YH-6Qf"/>
                         <outlet property="modelText" destination="ya9-UN-Aco" id="xYd-jd-LmN"/>
                         <outlet property="priceText" destination="oBe-t8-cih" id="fdg-jf-o5b"/>
+                        <outlet property="putErrorLabel" destination="L5V-1G-aRX" id="r5y-yc-CeT"/>
                         <outlet property="sizeText" destination="vAV-96-V9e" id="5pg-zc-oZU"/>
                         <outlet property="styleText" destination="8kX-xo-EII" id="ckP-HQ-Kma"/>
                         <outlet property="summaryText" destination="RwV-bb-DI9" id="dTn-zN-4mr"/>

@@ -19,37 +19,39 @@ class DELETEViewController: UIViewController {
     
     //For iOS device test change localhost:3000 to IP Direction
     
- func alamoGET(){
-    Alamofire.request(.GET, "http://localhost:3000/tshirts")
-        .responseJSON {(request, response, JSON, error) in
-                
-          if let data = JSON as? NSArray {
-            if data.count >= 2{
-             if let tshirt = data[1] as? NSDictionary {
-               if let id = tshirt["_id"] as? NSString {
-                
-                self.delete_ID_label.text = id as String
-                
-                Alamofire.request(.DELETE, "http://localhost:3000/tshirt/\(id)")
-                  .responseJSON {(request, response, JSON, error) in
+    func alamoGET(){
+    
+        Alamofire.request(.GET, "http://localhost:3000/tshirts")
+            .responseJSON {(request, response, Tshirts, error) in
+        //println(JSON)
+        let json = JSON(Tshirts!)
+        
+        if json.count >= 1{
+            
+            let id = json[0]["_id"]
+            println(id)
+            self.delete_ID_label.text = "\(id)"
+            
+            Alamofire.request(.DELETE, "http://localhost:3000/tshirt/\(id)")
+                .responseJSON {(request, response, JSON, error) in
+            
                     println("Proceso Completado")
-                }
-                }
-                }
-            }
-            else {
-              println("No hay suficientes playeras")
-              self.delete_ID_label.text = "No hay suficientes playeras"
-                        
-            }
                     
             }
+        }
+            
+        else {
+            println("No hay playeras que eliminar")
+            self.delete_ID_label.text = "No hay playeras que eliminar"
+                
+            }
+            
+        }
     }
-    }
-
     
     
-  
+    
+    
     @IBAction func deleteButton(sender: AnyObject) {
         alamoGET()
         
@@ -61,15 +63,18 @@ class DELETEViewController: UIViewController {
         super.viewDidLoad()
         
         
-        // Do any additional setup after loading the view.
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
+}
+
+
+
     /*
     // MARK: - Navigation
     
@@ -80,4 +85,4 @@ class DELETEViewController: UIViewController {
     }
     */
     
-}
+

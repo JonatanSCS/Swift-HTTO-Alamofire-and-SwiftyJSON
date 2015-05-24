@@ -33,7 +33,14 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     //For iOS device test change localhost:3000 to IP Direction
     
     func alamoPOST(){
-        let parameter = ["model": modelText.text, "price": styleText.text, "style": sizeText.text, "size": colourText.text, "colour": colourText.text, "summary": summaryText.text]
+        let parameter = [
+            "model": modelText.text,
+            "price": styleText.text,
+            "style": sizeText.text,
+            "size": colourText.text,
+            "colour": colourText.text,
+            "summary": summaryText.text ]
+        
         
         Alamofire.request(.POST, "http://localhost:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
             (request, response, JSON, error) in
@@ -44,9 +51,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     @IBAction func postButton(sender: AnyObject) {
         alamoPOST()
     }
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.

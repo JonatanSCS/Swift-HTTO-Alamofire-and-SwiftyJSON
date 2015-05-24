@@ -9,9 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
 
-    /*
+/*
     
     GET - direccionIP:(puert)/tshirts
     GET - direccionIP:(puert)/tshirt/ID
@@ -19,7 +18,7 @@ class ViewController: UIViewController {
     PUT - direccionIP:(puert)/tshirt/ID
     DELETE - direccionIP:(puert)/tshirt/ID
     
-    */
+*/
 
     override func viewDidLoad() {
         super.viewDidLoad()

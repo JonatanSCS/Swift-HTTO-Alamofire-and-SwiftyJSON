@@ -8,11 +8,13 @@ You Need Installl
 
 
 1- Run Mongo Data Base
-2- Run API qith node
+2- Run API with node
 3- Run App from Xcode
 
 ***** For iOS device test change localhost:3000 to IP Direction ******
 
+Petitions with Alamofire  https://github.com/Alamofire/Alamofire
+Parse JSON with SwiftyJSON  https://github.com/SwiftyJSON/SwiftyJSON
 
 
 HTTP Methods:

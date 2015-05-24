@@ -22,19 +22,19 @@ class GETViewController: UIViewController {
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var modifiedLabel: UILabel!
     
+    //tableTshir get its value from IdTableViewController
     
     var tableTshirt: Int = 0
-
     
     func alamoGET() {
-        
         
         //For iOS device test change localhost:3000 to IP Direction
         Alamofire.request(.GET, "http://localhost:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 //println(JSON)
                 let json = JSON(Tshirts!)
-                               let id = json[self.tableTshirt]["_id"].string
+                
+                let id = json[self.tableTshirt]["_id"].string
                     self.idLabel.text = id
                 let model = json[self.tableTshirt]["model"].string
                     self.modelLabel.text = model
@@ -50,11 +50,10 @@ class GETViewController: UIViewController {
                     self.summaryLabel.text = summary
                 let modified = json[self.tableTshirt]["summary"].string
                     self.modifiedLabel.text = modified
+        
         }
     }
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         alamoGET()

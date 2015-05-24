@@ -13,7 +13,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
 
     var array: Array <AnyObject> = []
     
-      override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
       
         Alamofire.request(.GET, "http://localhost:3000/tshirts")
@@ -27,10 +27,8 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                 var nuevoID = json[cuenta]["_id"].string
                 self.array.append(nuevoID!)
                 cuenta++
-                    
             }
-            cuenta = 0
-
+        
             self.tableView.reloadData()
         }
 
@@ -62,10 +60,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         let idCell: String = "Cell"
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(idCell) as! UITableViewCell
         cell.textLabel!.text = self.array[indexPath.row] as? String
-        
-        
-      
-       
+
         return cell
     }
     

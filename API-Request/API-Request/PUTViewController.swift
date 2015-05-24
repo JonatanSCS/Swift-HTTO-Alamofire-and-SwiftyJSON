@@ -31,32 +31,34 @@ class PUTViewController: UIViewController, UITextFieldDelegate {
     }
 
     
-    //For iOS device test change localhost:3000 to IP Direction
-    
     func alamoPUT() {
         
         //For iOS device test change localhost:3000 to IP Direction
         Alamofire.request(.GET, "http://localhost:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
-        //println(JSON)
+                
             let json = JSON(Tshirts!)
                 
-            if json.count >= 1{
+            if json.count >= 1 {
+                
                 let id = json[0]["_id"]
                 println(id)
         
-                let parameters_put = ["model": self.modelText.text, "price": self.priceText.text, "style": self.styleText.text, "size": self.sizeText.text, "colour": self.colourText.text, "summary": self.summaryText.text]
+                let parameters_put = [
+                    "model": self.modelText.text,
+                    "price": self.priceText.text,
+                    "style": self.styleText.text,
+                    "size": self.sizeText.text,
+                    "colour": self.colourText.text,
+                    "summary": self.summaryText.text ]
         
-        
+    
                 Alamofire.request(.PUT, "http://localhost:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
             (request, response, JSON, error) in
-                    println(JSON)
-            
             
                 }
-                }
+            }
 
-        
             else {
                 println("No hay playeras")
                 self.putErrorLabel.text = "No hay playeras"
@@ -74,8 +76,6 @@ class PUTViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

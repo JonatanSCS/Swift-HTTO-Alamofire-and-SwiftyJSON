@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 
 
-
 class GETViewController: UIViewController {
     
     @IBOutlet var errorLabel: UILabel!
@@ -23,6 +22,10 @@ class GETViewController: UIViewController {
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var modifiedLabel: UILabel!
     
+    
+    var tableTshirt: Int = 0
+
+    
     func alamoGET() {
         
         
@@ -31,42 +34,33 @@ class GETViewController: UIViewController {
             .responseJSON {(request, response, Tshirts, error) in
                 //println(JSON)
                 let json = JSON(Tshirts!)
-            if json.count >= 1{
-                let id = json[0]["_id"].string
+                               let id = json[self.tableTshirt]["_id"].string
                     self.idLabel.text = id
-                let model = json[0]["model"].string
+                let model = json[self.tableTshirt]["model"].string
                     self.modelLabel.text = model
-                let style = json[0]["style"].string
+                let style = json[self.tableTshirt]["style"].string
                     self.styleLabel.text = style
-                let size = json[0]["size"].string
+                let size = json[self.tableTshirt]["size"].string
                     self.sizeLabel.text = size
-                let colour = json[0]["colour"].string
+                let colour = json[self.tableTshirt]["colour"].string
                     self.colourLabel.text = colour
-                let price = json[0
-                    ]["price"].string
+                let price = json[self.tableTshirt]["price"].string
                     self.priceLabel.text = price
-                let summary = json[0]["summary"].string
+                let summary = json[self.tableTshirt]["summary"].string
                     self.summaryLabel.text = summary
-                let modified = json[0]["summary"].string
+                let modified = json[self.tableTshirt]["summary"].string
                     self.modifiedLabel.text = modified
-        }
-        
-        
-        else {
-            self.errorLabel.text = "No hay playeras"
-            self.errorLabel.textColor = UIColor.blackColor()
-                }
         }
     }
 
-    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         alamoGET()
+        println(tableTshirt)
         
-        // Do any additional setup after loading the view.
+              // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AA049671B114B9300A02FC1 /* IdTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA049661B114B9300A02FC1 /* IdTableViewController.swift */; };
 		3C8F90841B06BECC0016CD17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F90831B06BECC0016CD17 /* AppDelegate.swift */; };
 		3C8F90871B06BECC0016CD17 /* API_Request.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F90851B06BECC0016CD17 /* API_Request.xcdatamodeld */; };
 		3C8F90891B06BECC0016CD17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F90881B06BECC0016CD17 /* ViewController.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3AA049661B114B9300A02FC1 /* IdTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdTableViewController.swift; sourceTree = "<group>"; };
 		3C8F907E1B06BECC0016CD17 /* API-Request.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "API-Request.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C8F90821B06BECC0016CD17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C8F90831B06BECC0016CD17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				3C8F90A81B06BFEB0016CD17 /* POSTViewController.swift */,
 				3C8F90AA1B06BFF50016CD17 /* PUTViewController.swift */,
 				3C8F90AC1B06C0000016CD17 /* DELETEViewController.swift */,
+				3AA049661B114B9300A02FC1 /* IdTableViewController.swift */,
 				3C8F908A1B06BECC0016CD17 /* Main.storyboard */,
 				3C8F908D1B06BECC0016CD17 /* Images.xcassets */,
 				3C8F908F1B06BECC0016CD17 /* LaunchScreen.xib */,
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AA049671B114B9300A02FC1 /* IdTableViewController.swift in Sources */,
 				3C8F90891B06BECC0016CD17 /* ViewController.swift in Sources */,
 				3C8F90A71B06BFE20016CD17 /* GETViewController.swift in Sources */,
 				3C8F90A91B06BFEB0016CD17 /* POSTViewController.swift in Sources */,

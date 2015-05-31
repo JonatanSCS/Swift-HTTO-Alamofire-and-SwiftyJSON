@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3AA049671B114B9300A02FC1 /* IdTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA049661B114B9300A02FC1 /* IdTableViewController.swift */; };
+		3C42FEC01B1BA5D8006CB3DF /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C42FEBF1B1BA5D8006CB3DF /* refresh.png */; };
 		3C8F90841B06BECC0016CD17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F90831B06BECC0016CD17 /* AppDelegate.swift */; };
 		3C8F90871B06BECC0016CD17 /* API_Request.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F90851B06BECC0016CD17 /* API_Request.xcdatamodeld */; };
 		3C8F90891B06BECC0016CD17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F90881B06BECC0016CD17 /* ViewController.swift */; };
@@ -85,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		3AA049661B114B9300A02FC1 /* IdTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdTableViewController.swift; sourceTree = "<group>"; };
+		3C42FEBF1B1BA5D8006CB3DF /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		3C8F907E1B06BECC0016CD17 /* API-Request.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "API-Request.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C8F90821B06BECC0016CD17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C8F90831B06BECC0016CD17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				3CA681941B1B396C004BDD15 /* Unknown.png */,
+				3C42FEBF1B1BA5D8006CB3DF /* refresh.png */,
 				3C9F2A351B11118600A5ADCE /* SwiftyJSON.swift */,
 				3C8F90831B06BECC0016CD17 /* AppDelegate.swift */,
 				3C8F90881B06BECC0016CD17 /* ViewController.swift */,
@@ -318,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C42FEC01B1BA5D8006CB3DF /* refresh.png in Resources */,
 				3C8F908C1B06BECC0016CD17 /* Main.storyboard in Resources */,
 				3C8F90911B06BECC0016CD17 /* LaunchScreen.xib in Resources */,
 				3CA681951B1B396C004BDD15 /* Unknown.png in Resources */,

@@ -46,6 +46,9 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
     }
     
     
+    
+    
+    
     func alamoPUT() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
@@ -66,7 +69,7 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
         
                         Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
                             (request, response, JSON, error) in
-                            self.activityIndicator.stopAnimating()
+                                self.activityIndicator.stopAnimating()
                         }
                     }
 
@@ -76,6 +79,7 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
                     }
                 }
                     
+                    
                 else {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
@@ -83,12 +87,12 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
+    
+    
+    
     @IBAction func send_PUTbutton(sender: AnyObject) {
         alamoPUT()
     }
-    
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

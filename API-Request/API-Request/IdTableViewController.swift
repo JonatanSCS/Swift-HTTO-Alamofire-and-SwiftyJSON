@@ -21,18 +21,16 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         
     }
 
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func tableGetInfo(){
         activityIndicator.startAnimating()
+        array = []
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
                     var tshirts = json
                     var cuenta = 0
-            
+                    
                     for tshirt in tshirts {
                         var nuevoID = json[cuenta]["_id"].string
                         self.array.append(nuevoID!)
@@ -41,12 +39,24 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                     self.tableView.reloadData()
                     self.activityIndicator.stopAnimating()
                 }
-        
+                    
                 else {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
                 }
         }
+
+    
+    }
+    
+    @IBAction func reloadData(sender: AnyObject) {
+               tableGetInfo()
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableGetInfo()
+        
     }
 
     

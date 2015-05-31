@@ -30,14 +30,15 @@ class DELETEViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     
     }
-    //Change to your IP Direction
     
-    func alamoGET(){
+    
+    func alamoDelete(){
         actyvityIndicator.startAnimating()
         
+        //Change to your IP Direction
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
-        //println(JSON)
+                
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
                     
@@ -58,15 +59,13 @@ class DELETEViewController: UIViewController {
                     }
             
                     else {
-                        if error != nil {
-                            println("Error en el servidor")
-                        println("No hay playeras que eliminar")
+                        self.actyvityIndicator.stopAnimating()
                         self.delete_ID_label.text = "No hay playeras que eliminar"
-                            self.actyvityIndicator.stopAnimating()
-                        }
                     }
                 }
+                    
                 else {
+                    
                     self.serverError()
                     self.actyvityIndicator.stopAnimating()
                 }
@@ -75,14 +74,13 @@ class DELETEViewController: UIViewController {
     
     
     
-    
     @IBAction func deleteButton(sender: AnyObject) {
-        alamoGET()
+        alamoDelete()
         
     }
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

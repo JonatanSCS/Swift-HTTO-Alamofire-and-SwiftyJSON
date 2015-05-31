@@ -21,6 +21,17 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </activityIndicatorView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="41k-kS-ir1">
+                                    <rect key="frame" x="282" y="12" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" image="refresh.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="reloadData:" destination="nK8-kr-fia" eventType="touchUpInside" id="ugR-mn-XfF"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -164,13 +175,6 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9mu-HR-wLL">
-                                <rect key="frame" x="30" y="77" width="258" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1ee-Mq-ccV">
                                 <rect key="frame" x="82" y="460" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -187,6 +191,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cul-tI-gS3">
+                                <rect key="frame" x="259" y="73" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="refresh.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresInfoView:" destination="vre-po-teG" eventType="touchUpInside" id="4sD-Hi-eJ3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -194,7 +208,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="kPD-gr-aei" id="OEV-30-TPY"/>
                         <outlet property="colourLabel" destination="S3E-Th-r4i" id="oCr-1v-bYZ"/>
-                        <outlet property="errorLabel" destination="9mu-HR-wLL" id="kqL-Ji-Lya"/>
                         <outlet property="idLabel" destination="PXk-8A-DMb" id="aPc-FB-AWz"/>
                         <outlet property="imageCam" destination="1ee-Mq-ccV" id="d3b-dT-bgr"/>
                         <outlet property="modelLabel" destination="0YF-Um-n5D" id="fJQ-rG-eaR"/>
@@ -212,7 +225,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="menuInicial" id="vXZ-lx-hvc" customClass="ViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -651,6 +664,9 @@
             <point key="canvasLocation" x="-628" y="290"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="refresh.png" width="70" height="70"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

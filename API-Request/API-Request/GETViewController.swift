@@ -14,7 +14,6 @@ class GETViewController: UIViewController {
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var imageCam: UIImageView!
-    @IBOutlet var errorLabel: UILabel!
     @IBOutlet var idLabel: UILabel!
     @IBOutlet var modelLabel: UILabel!
     @IBOutlet var styleLabel: UILabel!
@@ -46,7 +45,7 @@ class GETViewController: UIViewController {
         //Change to your IP Direction
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
-                //println(JSON)
+                
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
                 
@@ -91,6 +90,10 @@ class GETViewController: UIViewController {
     }
 
     
+    
+    @IBAction func refresInfoView(sender: AnyObject) {
+        alamoGET()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

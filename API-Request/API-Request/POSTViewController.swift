@@ -30,6 +30,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         
         return true
     }
+    
     func sinImagen(){
         var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
@@ -60,16 +61,19 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
                 (request, response, JSON, error) in
                     self.sinImagen()
                     self.activityIndicator.stopAnimating()
+                
                 if error != nil {
-                   self.serverError()
+                    self.serverError()
                     self.activityIndicator.stopAnimating()
                 }
             }
 
         }
+        
         else {
             activityIndicator.startAnimating()
             imageCamPicker.reloadInputViews()
+            
             var image = imageCamPicker.image!
             var imageData = UIImagePNGRepresentation(image)
             let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
@@ -77,6 +81,8 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         
             Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
+                self.activityIndicator.stopAnimating()
+
                 if error != nil {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
@@ -85,12 +91,13 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         }
     }
   
+    
     @IBAction func postButton(sender: AnyObject) {
         alamoPOST()
     }
     
-    var imagePicker: UIImagePickerController!
     
+    var imagePicker: UIImagePickerController!
     @IBAction func TomarFoto(sender: AnyObject) {
         
         imagePicker = UIImagePickerController()
@@ -98,10 +105,8 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         imagePicker.sourceType = .Camera
         presentViewController(imagePicker, animated: true, completion:nil)
     }
-    
-    
-    
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.

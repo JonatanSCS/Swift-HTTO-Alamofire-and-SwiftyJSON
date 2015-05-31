@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Hola-->
+        <!--Tshirts-->
         <scene sceneID="XJ2-ai-6Sq">
             <objects>
                 <tableViewController id="nK8-kr-fia" customClass="IdTableViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
@@ -12,9 +12,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="MtK-Ce-DxB">
+                            <rect key="frame" x="0.0" y="64" width="320" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="dfF-6V-kz1">
+                                    <rect key="frame" x="8" y="8" width="37" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="74" id="b62-BP-Eq8">
-                                <rect key="frame" x="0.0" y="86" width="320" height="74"/>
+                                <rect key="frame" x="0.0" y="136" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b62-BP-Eq8" id="zdc-b8-j0M">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="73"/>
@@ -30,7 +42,10 @@
                             <outlet property="delegate" destination="nK8-kr-fia" id="YRJ-TL-4xL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Hola" id="txo-bk-diz"/>
+                    <navigationItem key="navigationItem" title="Tshirts" id="txo-bk-diz"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="dfF-6V-kz1" id="156-lM-vDQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH4-UM-BSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,11 +182,17 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="kPD-gr-aei">
+                                <rect key="frame" x="34" y="69" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="IT2-qi-ncn"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="kPD-gr-aei" id="OEV-30-TPY"/>
                         <outlet property="colourLabel" destination="S3E-Th-r4i" id="oCr-1v-bYZ"/>
                         <outlet property="errorLabel" destination="9mu-HR-wLL" id="kqL-Ji-Lya"/>
                         <outlet property="idLabel" destination="PXk-8A-DMb" id="aPc-FB-AWz"/>
@@ -385,11 +406,17 @@
                                 <rect key="frame" x="80" y="353" width="240" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="91q-Fc-AU3">
+                                <rect key="frame" x="24" y="491" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vVS-bn-8Sa"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="91q-Fc-AU3" id="gBF-RY-nHx"/>
                         <outlet property="colourText" destination="Kgv-ew-kLH" id="4KW-dY-jsU"/>
                         <outlet property="imageCamPicker" destination="Uui-Ul-6TX" id="o6W-jN-R54"/>
                         <outlet property="modelText" destination="5Xv-Nx-hd0" id="Z0X-Hs-S0z"/>
@@ -436,11 +463,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="sVQ-Ob-NdO">
+                                <rect key="frame" x="142" y="218" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="gUM-s3-sj3">
+                                <rect key="frame" x="142" y="219" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="G3f-2X-ofg"/>
                     <connections>
+                        <outlet property="actyvityIndicator" destination="sVQ-Ob-NdO" id="H0j-4S-HjU"/>
                         <outlet property="delete_ID_label" destination="P4w-d1-oPM" id="0gP-hB-rd2"/>
                     </connections>
                 </viewController>
@@ -570,11 +608,17 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="ukO-l8-U46">
+                                <rect key="frame" x="46" y="456" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="iUr-yf-VEJ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ukO-l8-U46" id="IUl-0q-91K"/>
                         <outlet property="colourText" destination="jZT-AU-8V5" id="cwz-YH-6Qf"/>
                         <outlet property="modelText" destination="ya9-UN-Aco" id="xYd-jd-LmN"/>
                         <outlet property="priceText" destination="oBe-t8-cih" id="fdg-jf-o5b"/>

@@ -13,6 +13,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
 
     var array: Array <AnyObject> = []
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     func serverError(){
         var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
@@ -24,7 +25,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        activityIndicator.startAnimating()
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
@@ -38,10 +39,12 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                         cuenta++
                     }
                     self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
                 }
         
                 else {
                     self.serverError()
+                    self.activityIndicator.stopAnimating()
                 }
         }
     }

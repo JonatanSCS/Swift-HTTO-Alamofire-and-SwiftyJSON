@@ -12,6 +12,7 @@ import Alamofire
 
 class GETViewController: UIViewController {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var imageCam: UIImageView!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var idLabel: UILabel!
@@ -41,7 +42,7 @@ class GETViewController: UIViewController {
     var tableTshirt: Int = 0
     
     func alamoGET() {
-        
+        activityIndicator.startAnimating()
         //Change to your IP Direction
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
@@ -71,16 +72,19 @@ class GETViewController: UIViewController {
                         let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
                         var decodedIamge = UIImage(data: decodedData!)
                             self.imageCam.image = decodedIamge
+                        self.activityIndicator.stopAnimating()
                     }
                 
                     else {
                         self.imageCam.image = UIImage(named: "Unknown.png")
+                         self.activityIndicator.stopAnimating()
                       
                     }
                 }
                 
                 else {
                     self.serverError()
+                    self.activityIndicator.stopAnimating()
 
                 }
         }

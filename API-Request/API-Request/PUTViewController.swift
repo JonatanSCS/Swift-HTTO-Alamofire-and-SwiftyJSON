@@ -11,6 +11,7 @@ import Alamofire
 
 class PUTViewController: UIViewController, UITextFieldDelegate{
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var putErrorLabel: UILabel!
     @IBOutlet var modelText: UITextField!
     @IBOutlet var styleText: UITextField!
@@ -46,6 +47,7 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
     
     
     func alamoPUT() {
+        activityIndicator.startAnimating()
         //Change to your IP Direction
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
@@ -64,17 +66,19 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
         
                         Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
                             (request, response, JSON, error) in
-            
+                            self.activityIndicator.stopAnimating()
                         }
                     }
 
                     else {
                         self.sinPlayeras()
+                        self.activityIndicator.stopAnimating()
                     }
                 }
                     
                 else {
                     self.serverError()
+                    self.activityIndicator.stopAnimating()
                 }
         }
     }

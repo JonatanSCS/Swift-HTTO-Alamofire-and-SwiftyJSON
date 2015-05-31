@@ -11,6 +11,7 @@ import Alamofire
 
 class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var imageCamPicker: UIImageView!
     @IBOutlet var modelText: UITextField!
     @IBOutlet var styleText: UITextField!
@@ -54,18 +55,20 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             "summary": summaryText.text]
 
         if imageCamPicker.image == nil {
-            
+            activityIndicator.startAnimating()
             Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
-                self.sinImagen()
-                
+                    self.sinImagen()
+                    self.activityIndicator.stopAnimating()
                 if error != nil {
                    self.serverError()
+                    self.activityIndicator.stopAnimating()
                 }
             }
 
         }
         else {
+            activityIndicator.startAnimating()
             imageCamPicker.reloadInputViews()
             var image = imageCamPicker.image!
             var imageData = UIImagePNGRepresentation(image)
@@ -76,6 +79,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
                 (request, response, JSON, error) in
                 if error != nil {
                     self.serverError()
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }

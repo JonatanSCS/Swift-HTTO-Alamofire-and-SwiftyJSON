@@ -14,6 +14,7 @@ import Alamofire
 class DELETEViewController: UIViewController {
     
     
+    @IBOutlet var actyvityIndicator: UIActivityIndicatorView!
     @IBOutlet var delete_ID_label: UILabel!
     
     
@@ -32,6 +33,8 @@ class DELETEViewController: UIViewController {
     //Change to your IP Direction
     
     func alamoGET(){
+        actyvityIndicator.startAnimating()
+        
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
         //println(JSON)
@@ -47,8 +50,10 @@ class DELETEViewController: UIViewController {
                             .responseJSON {(request, response, JSON, error) in
                                 if error != nil {
                                     self.serverError()
+                                    self.actyvityIndicator.stopAnimating()
                                 }
                                 self.tshirtEliminada()
+                                self.actyvityIndicator.stopAnimating()
                         }
                     }
             
@@ -57,11 +62,13 @@ class DELETEViewController: UIViewController {
                             println("Error en el servidor")
                         println("No hay playeras que eliminar")
                         self.delete_ID_label.text = "No hay playeras que eliminar"
+                            self.actyvityIndicator.stopAnimating()
                         }
                     }
                 }
                 else {
                     self.serverError()
+                    self.actyvityIndicator.stopAnimating()
                 }
         }
     }

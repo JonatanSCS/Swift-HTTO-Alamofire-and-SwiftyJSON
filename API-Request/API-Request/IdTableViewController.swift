@@ -13,6 +13,15 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
 
     var array: Array <AnyObject> = []
     
+    func serverError(){
+        var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -32,9 +41,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                 }
         
                 else {
-                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.serverError()
                 }
         }
     }

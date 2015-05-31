@@ -30,19 +30,30 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
         return true
     }
 
+    func sinPlayeras(){
+        var alert = UIAlertController(title: "Error", message: "Ya no hay playeras en la base de datos", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        self.putErrorLabel.text = "No hay playeras"
+        self.putErrorLabel.textColor = UIColor.blackColor()
+    }
+    func serverError(){
+        var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    
+    }
+    
     
     func alamoPUT() {
-        
         //Change to your IP Direction
         Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
-                
                     if json.count >= 1 {
                         let id = json[0]["_id"]
                         //println(id)
-        
                         let parameters_put = [
                             "model": self.modelText.text,
                             "price": self.priceText.text,
@@ -51,7 +62,6 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
                             "colour": self.colourText.text,
                             "summary": self.summaryText.text ]
         
-    
                         Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
                             (request, response, JSON, error) in
             
@@ -59,17 +69,12 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
                     }
 
                     else {
-                        var alert = UIAlertController(title: "Error", message: "Ya no hay playeras en la base de datos", preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
-                        self.putErrorLabel.text = "No hay playeras"
-                        self.putErrorLabel.textColor = UIColor.blackColor()
+                        self.sinPlayeras()
                     }
                 }
+                    
                 else {
-                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.serverError()
                 }
         }
     }

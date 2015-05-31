@@ -29,62 +29,56 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         
         return true
     }
+    func sinImagen(){
+        var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     
+    }
     
+    func serverError(){
+        var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     //Change to your IP Direction
     
     func alamoPOST(){
-        if imageCamPicker.image == nil {
-            
-            let parameter = [
-                "model": modelText.text,
-                "price": styleText.text,
-                "style": sizeText.text,
-                "size": colourText.text,
-                "colour": colourText.text,
-                "summary": summaryText.text]
-            
-            
-            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
-                (request, response, JSON, error) in
-                var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-
-                if error != nil {
-                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            }
-
-        
-        
-        }
-        else {
-        imageCamPicker.reloadInputViews()
-        var image = imageCamPicker.image!
-        var imageData = UIImagePNGRepresentation(image)
-        
-        let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-        
-        let parameter = [
+        var parameter = [
             "model": modelText.text,
             "price": styleText.text,
             "style": sizeText.text,
             "size": colourText.text,
             "colour": colourText.text,
-            "summary": summaryText.text,
-            "images": base64]
+            "summary": summaryText.text]
+
+        if imageCamPicker.image == nil {
+            
+            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+                (request, response, JSON, error) in
+                self.sinImagen()
+                
+                if error != nil {
+                   self.serverError()
+                }
+            }
+
+        }
+        else {
+            imageCamPicker.reloadInputViews()
+            var image = imageCamPicker.image!
+            var imageData = UIImagePNGRepresentation(image)
+            let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+            parameter["images"] = base64
         
-        
-        Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
-            (request, response, JSON, error) in
-            if error != nil {
-                println("Error en el servidor")
+            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+                (request, response, JSON, error) in
+                if error != nil {
+                    self.serverError()
+                }
             }
         }
-    }
     }
   
     @IBAction func postButton(sender: AnyObject) {
@@ -98,7 +92,6 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .Camera
-        
         presentViewController(imagePicker, animated: true, completion:nil)
     }
     
@@ -111,12 +104,8 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         imageCamPicker.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning() {

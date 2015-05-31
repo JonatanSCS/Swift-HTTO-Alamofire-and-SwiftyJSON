@@ -17,6 +17,18 @@ class DELETEViewController: UIViewController {
     @IBOutlet var delete_ID_label: UILabel!
     
     
+    func serverError(){
+        var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    func tshirtEliminada(){
+        var alert = UIAlertController(title: "Elimindada", message: "Se eliminó la Tshirt", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    
+    }
     //Change to your IP Direction
     
     func alamoGET(){
@@ -34,13 +46,9 @@ class DELETEViewController: UIViewController {
                         Alamofire.request(.DELETE, "http://192.168.1.71:3000/tshirt/\(id)")
                             .responseJSON {(request, response, JSON, error) in
                                 if error != nil {
-                                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
-                                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                                    self.presentViewController(alert, animated: true, completion: nil)
+                                    self.serverError()
                                 }
-                                var alert = UIAlertController(title: "Eliminado", message: "Se eliminó la Tshirt correctamente", preferredStyle: UIAlertControllerStyle.Alert)
-                                alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                                self.presentViewController(alert, animated: true, completion: nil)
+                                self.tshirtEliminada()
                         }
                     }
             
@@ -53,9 +61,7 @@ class DELETEViewController: UIViewController {
                     }
                 }
                 else {
-                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.serverError()
                 }
         }
     }

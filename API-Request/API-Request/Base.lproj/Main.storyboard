@@ -14,7 +14,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="74" id="b62-BP-Eq8">
-                                <rect key="frame" x="0.0" y="86" width="320" height="74"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b62-BP-Eq8" id="zdc-b8-j0M">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="73"/>
@@ -163,6 +163,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1ee-Mq-ccV">
+                                <rect key="frame" x="35" y="427" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -171,6 +175,7 @@
                         <outlet property="colourLabel" destination="S3E-Th-r4i" id="oCr-1v-bYZ"/>
                         <outlet property="errorLabel" destination="9mu-HR-wLL" id="kqL-Ji-Lya"/>
                         <outlet property="idLabel" destination="PXk-8A-DMb" id="aPc-FB-AWz"/>
+                        <outlet property="imageCam" destination="1ee-Mq-ccV" id="d3b-dT-bgr"/>
                         <outlet property="modelLabel" destination="0YF-Um-n5D" id="fJQ-rG-eaR"/>
                         <outlet property="modifiedLabel" destination="jks-Cz-Hv8" id="efq-kZ-Df3"/>
                         <outlet property="priceLabel" destination="IWt-Cm-fuC" id="5I3-ab-yGh"/>
@@ -356,7 +361,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kgb-9u-0xu">
-                                <rect key="frame" x="200" y="385" width="87" height="30"/>
+                                <rect key="frame" x="135" y="495" width="87" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Enviar POST">
                                     <color key="titleColor" red="0.35203444499999997" green="1" blue="0.78023540469999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -366,12 +371,27 @@
                                     <action selector="postButton:" destination="PUf-SY-7zm" eventType="touchUpInside" id="YqJ-hr-9dZ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Uui-Ul-6TX">
+                                <rect key="frame" x="73" y="359" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7N5-dD-Cfz">
+                                <rect key="frame" x="18" y="398" width="43" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Tomar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="TomarFoto:" destination="PUf-SY-7zm" eventType="touchUpInside" id="K1A-ng-sba"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vVS-bn-8Sa"/>
                     <connections>
                         <outlet property="colourText" destination="Kgv-ew-kLH" id="4KW-dY-jsU"/>
+                        <outlet property="imageCamPicker" destination="Uui-Ul-6TX" id="o6W-jN-R54"/>
                         <outlet property="modelText" destination="5Xv-Nx-hd0" id="Z0X-Hs-S0z"/>
                         <outlet property="priceText" destination="zT8-hu-3Ry" id="q2Q-bM-4A1"/>
                         <outlet property="sizeText" destination="gIF-aT-sYp" id="co4-ZP-5J2"/>

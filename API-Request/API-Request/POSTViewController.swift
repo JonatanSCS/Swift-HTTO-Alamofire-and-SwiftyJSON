@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 
-class POSTViewController: UIViewController, UITextFieldDelegate {
+class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
     
+    @IBOutlet var imageCamPicker: UIImageView!
     @IBOutlet var modelText: UITextField!
     @IBOutlet var styleText: UITextField!
     @IBOutlet var sizeText: UITextField!
@@ -33,13 +34,20 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     //For iOS device test change localhost:3000 to IP Direction
     
     func alamoPOST(){
+        
+        var image = imageCamPicker.image!
+        var imageData = UIImagePNGRepresentation(image)
+        
+        let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        
         let parameter = [
             "model": modelText.text,
             "price": styleText.text,
             "style": sizeText.text,
             "size": colourText.text,
             "colour": colourText.text,
-            "summary": summaryText.text ]
+            "summary": summaryText.text,
+            "images": base64]
         
         
         Alamofire.request(.POST, "http://localhost:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
@@ -51,10 +59,33 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     @IBAction func postButton(sender: AnyObject) {
         alamoPOST()
     }
+    
+    var imagePicker: UIImagePickerController!
+    
+    @IBAction func TomarFoto(sender: AnyObject) {
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .Camera
+        
+        presentViewController(imagePicker, animated: true, completion:nil)
+    }
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imageCamPicker.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

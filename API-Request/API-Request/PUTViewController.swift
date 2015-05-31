@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class PUTViewController: UIViewController, UITextFieldDelegate {
+class PUTViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet var putErrorLabel: UILabel!
     @IBOutlet var modelText: UITextField!

@@ -12,6 +12,7 @@ import Alamofire
 
 class GETViewController: UIViewController {
     
+    @IBOutlet var imageCam: UIImageView!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var idLabel: UILabel!
     @IBOutlet var modelLabel: UILabel!
@@ -50,7 +51,10 @@ class GETViewController: UIViewController {
                     self.summaryLabel.text = summary
                 let modified = json[self.tableTshirt]["summary"].string
                     self.modifiedLabel.text = modified
-        
+                let image = json[self.tableTshirt]["images"].string
+                    let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
+                    var decodedIamge = UIImage(data: decodedData!)
+                    self.imageCam.image = decodedIamge
         }
     }
 

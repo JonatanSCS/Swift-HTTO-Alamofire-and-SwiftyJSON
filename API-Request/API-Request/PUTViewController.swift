@@ -33,46 +33,49 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
     
     func alamoPUT() {
         
-        //For iOS device test change localhost:3000 to IP Direction
-        Alamofire.request(.GET, "http://localhost:3000/tshirts")
+        //Change to your IP Direction
+        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
+                if Tshirts != nil {
+                    let json = JSON(Tshirts!)
                 
-            let json = JSON(Tshirts!)
-                
-            if json.count >= 1 {
-                
-                let id = json[0]["_id"]
-                println(id)
+                    if json.count >= 1 {
+                        let id = json[0]["_id"]
+                        //println(id)
         
-                let parameters_put = [
-                    "model": self.modelText.text,
-                    "price": self.priceText.text,
-                    "style": self.styleText.text,
-                    "size": self.sizeText.text,
-                    "colour": self.colourText.text,
-                    "summary": self.summaryText.text ]
+                        let parameters_put = [
+                            "model": self.modelText.text,
+                            "price": self.priceText.text,
+                            "style": self.styleText.text,
+                            "size": self.sizeText.text,
+                            "colour": self.colourText.text,
+                            "summary": self.summaryText.text ]
         
     
-                Alamofire.request(.PUT, "http://localhost:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
-            (request, response, JSON, error) in
+                        Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
+                            (request, response, JSON, error) in
             
-                }
-            }
+                        }
+                    }
 
-            else {
-                println("No hay playeras")
-                self.putErrorLabel.text = "No hay playeras"
-                self.putErrorLabel.textColor = UIColor.blackColor()
-            }
+                    else {
+                        var alert = UIAlertController(title: "Error", message: "Ya no hay playeras en la base de datos", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.putErrorLabel.text = "No hay playeras"
+                        self.putErrorLabel.textColor = UIColor.blackColor()
+                    }
+                }
+                else {
+                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
         }
     }
     
-    
-    
-    
     @IBAction func send_PUTbutton(sender: AnyObject) {
         alamoPUT()
-        
     }
     
 

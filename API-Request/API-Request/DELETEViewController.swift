@@ -17,35 +17,46 @@ class DELETEViewController: UIViewController {
     @IBOutlet var delete_ID_label: UILabel!
     
     
-    //For iOS device test change localhost:3000 to IP Direction
+    //Change to your IP Direction
     
     func alamoGET(){
-    
-        Alamofire.request(.GET, "http://localhost:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
         //println(JSON)
-        let json = JSON(Tshirts!)
-        
-        if json.count >= 1{
-            
-            let id = json[0]["_id"]
-            println(id)
-            self.delete_ID_label.text = "\(id)"
-            
-            Alamofire.request(.DELETE, "http://localhost:3000/tshirt/\(id)")
-                .responseJSON {(request, response, JSON, error) in
-            
-                    println("Proceso Completado")
+                if Tshirts != nil {
+                    let json = JSON(Tshirts!)
                     
-            }
-        }
+                    if json.count >= 1{
+                        let id = json[0]["_id"]
+                        //println(id)
+                        self.delete_ID_label.text = "\(id)"
             
-        else {
-            println("No hay playeras que eliminar")
-            self.delete_ID_label.text = "No hay playeras que eliminar"
-                
-            }
+                        Alamofire.request(.DELETE, "http://192.168.1.71:3000/tshirt/\(id)")
+                            .responseJSON {(request, response, JSON, error) in
+                                if error != nil {
+                                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+                                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                                    self.presentViewController(alert, animated: true, completion: nil)
+                                }
+                                var alert = UIAlertController(title: "Eliminado", message: "Se eliminó la Tshirt correctamente", preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                                self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    }
             
+                    else {
+                        if error != nil {
+                            println("Error en el servidor")
+                        println("No hay playeras que eliminar")
+                        self.delete_ID_label.text = "No hay playeras que eliminar"
+                        }
+                    }
+                }
+                else {
+                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
         }
     }
     

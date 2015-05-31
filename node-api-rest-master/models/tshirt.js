@@ -12,7 +12,7 @@ var Images = new Schema({
 
 var Tshirt = new Schema({
   model:    { type: String, require: true },
-  images:   { type: String, require: true },
+  images:   { type: String, require: false },
   style:    { type: String, 
               require: true 
             },

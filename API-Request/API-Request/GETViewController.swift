@@ -29,36 +29,56 @@ class GETViewController: UIViewController {
     
     func alamoGET() {
         
-        //For iOS device test change localhost:3000 to IP Direction
-        Alamofire.request(.GET, "http://localhost:3000/tshirts")
+        //Change to your IP Direction
+        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 //println(JSON)
-                let json = JSON(Tshirts!)
+                if Tshirts != nil {
+                    let json = JSON(Tshirts!)
                 
-                let id = json[self.tableTshirt]["_id"].string
-                    self.idLabel.text = id
-                let model = json[self.tableTshirt]["model"].string
-                    self.modelLabel.text = model
-                let style = json[self.tableTshirt]["style"].string
-                    self.styleLabel.text = style
-                let size = json[self.tableTshirt]["size"].string
-                    self.sizeLabel.text = size
-                let colour = json[self.tableTshirt]["colour"].string
-                    self.colourLabel.text = colour
-                let price = json[self.tableTshirt]["price"].string
-                    self.priceLabel.text = price
-                let summary = json[self.tableTshirt]["summary"].string
-                    self.summaryLabel.text = summary
-                let modified = json[self.tableTshirt]["summary"].string
-                    self.modifiedLabel.text = modified
-                let image = json[self.tableTshirt]["images"].string
+                    let id = json[self.tableTshirt]["_id"].string
+                        self.idLabel.text = id
+                    let model = json[self.tableTshirt]["model"].string
+                        self.modelLabel.text = model
+                    let style = json[self.tableTshirt]["style"].string
+                        self.styleLabel.text = style
+                    let size = json[self.tableTshirt]["size"].string
+                        self.sizeLabel.text = size
+                    let colour = json[self.tableTshirt]["colour"].string
+                        self.colourLabel.text = colour
+                    let price = json[self.tableTshirt]["price"].string
+                        self.priceLabel.text = price
+                    let summary = json[self.tableTshirt]["summary"].string
+                        self.summaryLabel.text = summary
+                    let modified = json[self.tableTshirt]["summary"].string
+                        self.modifiedLabel.text = modified
+                    let image = json[self.tableTshirt]["images"].string
                 
-                    let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
-                    var decodedIamge = UIImage(data: decodedData!)
-                        self.imageCam.image = decodedIamge
+                    if image != nil {
+                        let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
+                        var decodedIamge = UIImage(data: decodedData!)
+                            self.imageCam.image = decodedIamge
+                    }
+                
+                    else {
+                        self.imageCam.image = UIImage(named: "Unknown.png")
+                        var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+                
+                else {
+                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+
+                }
         }
     }
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         alamoGET()

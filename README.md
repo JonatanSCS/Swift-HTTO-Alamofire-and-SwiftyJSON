@@ -11,7 +11,7 @@ You Need Installl
 2- Run API with node
 3- Run App from Xcode
 
-***** For iOS device test change localhost:3000 to IP Direction ******
+***** Change IP Direction ******
 
 Petitions with Alamofire  https://github.com/Alamofire/Alamofire
 Parse JSON with SwiftyJSON  https://github.com/SwiftyJSON/SwiftyJSON

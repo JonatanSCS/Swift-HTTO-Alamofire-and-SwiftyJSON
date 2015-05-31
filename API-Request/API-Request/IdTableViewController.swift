@@ -16,24 +16,31 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        Alamofire.request(.GET, "http://localhost:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
-                
-            let json = JSON(Tshirts!)
-            var tshirts = json
-            var cuenta = 0
+                if Tshirts != nil {
+                    let json = JSON(Tshirts!)
+                    var tshirts = json
+                    var cuenta = 0
             
-            for tshirt in tshirts {
-                var nuevoID = json[cuenta]["_id"].string
-                self.array.append(nuevoID!)
-                cuenta++
-            }
+                    for tshirt in tshirts {
+                        var nuevoID = json[cuenta]["_id"].string
+                        self.array.append(nuevoID!)
+                        cuenta++
+                    }
+                    self.tableView.reloadData()
+                }
         
-            self.tableView.reloadData()
+                else {
+                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
         }
-
     }
 
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

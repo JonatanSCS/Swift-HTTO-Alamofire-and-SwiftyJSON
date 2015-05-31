@@ -31,10 +31,38 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     }
     
     
-    //For iOS device test change localhost:3000 to IP Direction
+    //Change to your IP Direction
     
     func alamoPOST(){
+        if imageCamPicker.image == nil {
+            
+            let parameter = [
+                "model": modelText.text,
+                "price": styleText.text,
+                "style": sizeText.text,
+                "size": colourText.text,
+                "colour": colourText.text,
+                "summary": summaryText.text]
+            
+            
+            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+                (request, response, JSON, error) in
+                var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+
+                if error != nil {
+                    var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+
         
+        
+        }
+        else {
+        imageCamPicker.reloadInputViews()
         var image = imageCamPicker.image!
         var imageData = UIImagePNGRepresentation(image)
         
@@ -50,10 +78,13 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             "images": base64]
         
         
-        Alamofire.request(.POST, "http://localhost:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+        Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
             (request, response, JSON, error) in
-            //println(JSON)
+            if error != nil {
+                println("Error en el servidor")
+            }
         }
+    }
     }
   
     @IBAction func postButton(sender: AnyObject) {

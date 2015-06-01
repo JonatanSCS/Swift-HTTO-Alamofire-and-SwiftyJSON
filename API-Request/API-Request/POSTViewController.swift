@@ -32,7 +32,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     @IBAction func redAction(sender: AnyObject) {
         redButton.setTitle("Selected", forState: UIControlState.Normal)
         blueButton.setTitle("", forState: UIControlState.Normal)
-       colourValue = "Red"
+        colourValue = "Red"
         
     }
     
@@ -70,7 +70,6 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     
     @IBAction func stepperPrice(sender: UIStepper) {
         if sender.value < 11{
-            
             self.priceLabelStepper.text = sender.value.description
         }
             
@@ -112,6 +111,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             "colour": colourValue,
             "summary": summaryText.text]
 
+        
         if imageCamPicker.image == nil {
             activityIndicator.startAnimating()
              //Change to your IP Direction

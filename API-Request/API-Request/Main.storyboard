@@ -7,7 +7,7 @@
         <!--Tshirts-->
         <scene sceneID="XJ2-ai-6Sq">
             <objects>
-                <tableViewController id="nK8-kr-fia" customClass="IdTableViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="tableView" id="nK8-kr-fia" customClass="IdTableViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="22" sectionFooterHeight="22" id="OdA-hd-oMr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,7 +60,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH4-UM-BSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110" y="-460"/>
+            <point key="canvasLocation" x="218" y="-438"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="e2x-xO-dFG">
@@ -73,6 +73,19 @@
                             <view contentMode="scaleToFill" id="Oig-Ae-97v">
                                 <rect key="frame" x="0.0" y="63" width="320" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KhY-6O-Smg">
+                                        <rect key="frame" x="204" y="10" width="41" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Editar">
+                                            <color key="titleColor" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="4oO-RR-BGq" kind="push" id="YUx-CH-oh9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.95927420389999996" green="0.97826086960000003" blue="0.97810722130000005" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v8d-bA-AY4">
@@ -225,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GB-Qc-90l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="409" y="-582"/>
+            <point key="canvasLocation" x="715" y="-438"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -236,9 +249,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YCh-Qd-dBc">
-                                <rect key="frame" x="50" y="160" width="60" height="30"/>
+                                <rect key="frame" x="50" y="160" width="159" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="GET">
+                                <state key="normal" title="Lista de Playeras (GET)">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -246,39 +259,10 @@
                                     <segue destination="nK8-kr-fia" kind="push" id="L00-Xk-xoN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fB4-Db-MuV">
-                                <rect key="frame" x="50" y="280" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="PUT">
-                                    <color key="titleColor" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="4oO-RR-BGq" kind="push" id="jN6-dL-E0Q"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NED-75-tdu">
-                                <rect key="frame" x="50" y="340" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="DELETE">
-                                    <color key="titleColor" red="0.97826086960000003" green="0.045685744030000003" blue="0.2646418116" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="b6T-eb-pXB" kind="push" id="xL5-q9-2Cd"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="METODOS HTTP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1WQ-YF-9Za">
-                                <rect key="frame" x="70" y="100" width="133" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pPW-ZB-twR">
-                                <rect key="frame" x="50" y="220" width="60" height="30"/>
+                                <rect key="frame" x="50" y="220" width="152" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="POST">
+                                <state key="normal" title="Nueva Playera (POST)">
                                     <color key="titleColor" red="0.35203444499999997" green="1" blue="0.78023540469999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -504,68 +488,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JkC-nQ-cJz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="104"/>
+            <point key="canvasLocation" x="238" y="290"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="KMf-io-P8Q">
-            <objects>
-                <viewController id="b6T-eb-pXB" customClass="DELETEViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ioj-3d-W1X">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Clm-qN-rhv">
-                                <rect key="frame" x="177" y="174" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Eliminar">
-                                    <color key="titleColor" red="0.97826086960000003" green="0.045685744030000003" blue="0.2646418116" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteButton:" destination="b6T-eb-pXB" eventType="touchUpInside" id="b1F-oo-AYn"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID Eliminado" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pGY-7G-79r">
-                                <rect key="frame" x="16" y="264" width="97" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Esperando ID.." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P4w-d1-oPM">
-                                <rect key="frame" x="144" y="264" width="240" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="sVQ-Ob-NdO">
-                                <rect key="frame" x="142" y="218" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="gUM-s3-sj3">
-                                <rect key="frame" x="142" y="219" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <color key="color" red="0.0" green="0.80358270200000004" blue="0.022585598389999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="G3f-2X-ofg"/>
-                    <connections>
-                        <outlet property="actyvityIndicator" destination="sVQ-Ob-NdO" id="H0j-4S-HjU"/>
-                        <outlet property="delete_ID_label" destination="P4w-d1-oPM" id="0gP-hB-rd2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H2h-nU-mEw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="250" y="1157"/>
-        </scene>
-        <!--View Controller-->
+        <!--Editiew Controller-->
         <scene sceneID="vYH-iQ-ntn">
             <objects>
-                <viewController id="4oO-RR-BGq" customClass="PUTViewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4oO-RR-BGq" customClass="EditiewController" customModule="API_Request" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AE1-BC-GVe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -744,10 +672,23 @@
                                     <action selector="blueAction:" destination="4oO-RR-BGq" eventType="touchUpInside" id="Wt7-hw-WxZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Jh-KU-oB8">
+                                <rect key="frame" x="138" y="62" width="166" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Eliminar Playera (Delete)">
+                                    <color key="titleColor" red="0.97826086960000003" green="0.045685744030000003" blue="0.2646418116" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteTshirt:" destination="4oO-RR-BGq" eventType="touchUpInside" id="HVK-zv-NI6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iUr-yf-VEJ"/>
+                    <navigationItem key="navigationItem" id="iUr-yf-VEJ">
+                        <nil key="title"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="ukO-l8-U46" id="IUl-0q-91K"/>
                         <outlet property="blueButton" destination="yoB-5p-9Xf" id="MWu-2W-tlD"/>
@@ -764,7 +705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CY-pP-FUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579" y="648"/>
+            <point key="canvasLocation" x="715" y="290"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XUe-aM-LVl">

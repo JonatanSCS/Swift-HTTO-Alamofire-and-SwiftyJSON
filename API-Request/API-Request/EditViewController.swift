@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class PUTViewController: UIViewController, UITextFieldDelegate{
+class EditiewController: UIViewController, UITextFieldDelegate{
    
     //TextField
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
@@ -104,7 +104,7 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
     
     }
     
-    
+    var getIDfromGet: String = ""
     func alamoPUT() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
@@ -123,15 +123,17 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
                             "colour": self.colourValue,
                             "summary": self.summaryText.text ]
         
-                        Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(id)", parameters:parameters_put, encoding: .JSON) .responseJSON {
+                        Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(self.getIDfromGet)", parameters:parameters_put, encoding: .JSON) .responseJSON {
                             (request, response, JSON, error) in
                                 self.activityIndicator.stopAnimating()
+                           
                         }
                     }
 
                     else {
                         self.sinPlayeras()
                         self.activityIndicator.stopAnimating()
+                        
                     }
                 }
                     
@@ -146,8 +148,18 @@ class PUTViewController: UIViewController, UITextFieldDelegate{
     
     
     
+    @IBAction func deleteTshirt(sender: AnyObject) {
+        
+        Alamofire.request(.DELETE, "http://192.168.1.71:3000/tshirt/\(getIDfromGet)")
+            .responseJSON {(request, response, JSON, error) in
+        }
+    }
+    
+    
+    
     @IBAction func send_PUTbutton(sender: AnyObject) {
         alamoPUT()
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

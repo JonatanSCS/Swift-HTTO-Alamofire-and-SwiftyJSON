@@ -38,8 +38,6 @@ class GETViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-   
-    
     
     var tableTshirt: Int = 0
     func alamoGET() {
@@ -106,10 +104,18 @@ class GETViewController: UIViewController {
         alamoGET()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var nextScene = segue.destinationViewController as! EditiewController
+            var getIDfromLabel = idLabel.text
+            nextScene.getIDfromGet = getIDfromLabel!
+        
+    }
+    
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         alamoGET()
         println(tableTshirt)
+        
         
               // Do any additional setup after loading the view.
     }

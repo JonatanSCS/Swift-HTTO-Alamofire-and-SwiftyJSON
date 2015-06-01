@@ -31,15 +31,17 @@ class GETViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
     func serverError(){
         var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
-        
     }
     
-    var tableTshirt: Int = 0
+   
     
+    
+    var tableTshirt: Int = 0
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
@@ -59,6 +61,13 @@ class GETViewController: UIViewController {
                         self.sizeLabel.text = size
                     let colour = json[self.tableTshirt]["colour"].string
                         self.colourLabel.text = colour
+                            if colour == "Red" {
+                                self.colourLabel.textColor = UIColor.redColor()
+                            }
+                            else {
+                                self.colourLabel.textColor = UIColor.blueColor()
+                            }
+                    
                     let price = json[self.tableTshirt]["price"].string
                         self.priceLabel.text = price
                     let summary = json[self.tableTshirt]["summary"].string
@@ -67,6 +76,8 @@ class GETViewController: UIViewController {
                         self.modifiedLabel.text = modified
                     let image = json[self.tableTshirt]["images"].string
                 
+                    
+                    
                     if image != nil {
                         let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
                         var decodedIamge = UIImage(data: decodedData!)

@@ -482,6 +482,7 @@
                         <outlet property="priceLabelStepper" destination="zDg-lR-qKN" id="tCw-2Q-ljc"/>
                         <outlet property="redButton" destination="EaR-lm-msA" id="dbU-cF-PaY"/>
                         <outlet property="smallButton" destination="lV4-f1-Qkv" id="xeo-wQ-BEW"/>
+                        <outlet property="stepperChange" destination="Xsv-qW-8bu" id="s3g-b6-3eg"/>
                         <outlet property="styleText" destination="QW6-0A-gZ2" id="Izx-ew-fTu"/>
                         <outlet property="summaryText" destination="QJr-7L-Kix" id="Qzc-8M-Liu"/>
                     </connections>
@@ -653,7 +654,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.97826086960000003" green="0.045685744030000003" blue="0.2646418116" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Selected">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -699,6 +700,7 @@
                         <outlet property="putErrorLabel" destination="L5V-1G-aRX" id="r5y-yc-CeT"/>
                         <outlet property="redButton" destination="jyo-Bw-Beg" id="B8c-s8-v2H"/>
                         <outlet property="smallButton" destination="jkN-QC-Sgm" id="NdW-H7-3KI"/>
+                        <outlet property="stepperUI" destination="gdF-pf-awq" id="N7K-qW-Ppp"/>
                         <outlet property="styleText" destination="8kX-xo-EII" id="ckP-HQ-Kma"/>
                         <outlet property="summaryText" destination="RwV-bb-DI9" id="dTn-zN-4mr"/>
                     </connections>

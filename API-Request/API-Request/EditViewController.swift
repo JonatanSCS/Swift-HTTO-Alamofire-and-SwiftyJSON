@@ -28,6 +28,8 @@ class EditiewController: UIViewController, UITextFieldDelegate{
     @IBOutlet var redButton: UIButton!
     @IBOutlet var blueButton: UIButton!
     
+    @IBOutlet var stepperUI: UIStepper!
+    
     
     var colourValue = "Red"
     @IBAction func redAction(sender: AnyObject) {
@@ -153,17 +155,28 @@ class EditiewController: UIViewController, UITextFieldDelegate{
         Alamofire.request(.DELETE, "http://192.168.1.71:3000/tshirt/\(getIDfromGet)")
             .responseJSON {(request, response, JSON, error) in
         }
+        dismissViewController()
+        
     }
     
     
     
     @IBAction func send_PUTbutton(sender: AnyObject) {
         alamoPUT()
+        dismissViewController()
         
     }
+    
+    func dismissViewController() {
+        navigationController?.popToRootViewControllerAnimated(true)
+        
+       
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        reloadInputViews()
         // Do any additional setup after loading the view.
     }
     

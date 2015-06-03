@@ -27,6 +27,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     @IBOutlet var redButton: UIButton!
     @IBOutlet var blueButton: UIButton!
     
+    @IBOutlet var stepperChange: UIStepper!
     
     var colourValue = "Red"
     @IBAction func redAction(sender: AnyObject) {
@@ -120,6 +121,8 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
                     self.sinImagen()
                     self.activityIndicator.stopAnimating()
                 
+                
+                
                 if error != nil {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
@@ -141,6 +144,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
+                
 
                 if error != nil {
                     self.serverError()
@@ -153,8 +157,24 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     
     @IBAction func postButton(sender: AnyObject) {
         alamoPOST()
+        modelText.text = ""
+        cleanParameters()
+        
     }
     
+    func cleanParameters(){
+        modelText.text = ""
+        styleText.text = ""
+        smallButton.tintColor = UIColor.blueColor()
+        mediumButton.tintColor = UIColor.blueColor()
+        largeButton.tintColor = UIColor.blueColor()
+        redButton.setTitle("Selected", forState: UIControlState.Normal)
+        stepperChange.value = 0
+        summaryText.text = ""
+        
+    }
+
+
     
     var imagePicker: UIImagePickerController!
     @IBAction func TomarFoto(sender: AnyObject) {

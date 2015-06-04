@@ -9,12 +9,27 @@
 import UIKit
 import Alamofire
 
-class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    //Picker
+    var pickerArray = ["SWAG", "Geek", "Qué usas?"]
+    var pickerRowNumber = 0
+    
+    @IBOutlet var pickerStyleView: UIPickerView!
+    
+  
+    
+    @IBOutlet var scrollView: UIScrollView!
+    
+    //ModelButton
+    
+    @IBOutlet var firstModel: UIButton!
+    @IBOutlet var secondModel: UIButton!
+    @IBOutlet var thirdModel: UIButton!
+    
+    
     //TextFields
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var imageCamPicker: UIImageView!
-    @IBOutlet var modelText: UITextField!
-    @IBOutlet var styleText: UITextField!
     @IBOutlet var summaryText: UITextField!
     @IBOutlet var priceLabelStepper: UILabel!
     
@@ -80,9 +95,47 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
 
     }
     
+    
+    
+    
+    
+    
+    
+    var modelValue = "2013"
+    
+    @IBAction func firstAction(sender: AnyObject) {
+        modelValue = "2013"
+        firstModel.tintColor = UIColor.blueColor()
+        secondModel.tintColor = UIColor.lightGrayColor()
+        thirdModel.tintColor = UIColor.lightGrayColor()
+        
+    }
+    
+    
+    @IBAction func secondValue(sender: AnyObject) {
+        modelValue = "2014"
+        firstModel.tintColor = UIColor.lightGrayColor()
+        secondModel.tintColor = UIColor.blueColor()
+        thirdModel.tintColor = UIColor.lightGrayColor()
+    }
+    
+    
+    @IBAction func thirdAction(sender: AnyObject) {
+        modelValue = "2015"
+        firstModel.tintColor = UIColor.lightGrayColor()
+        secondModel.tintColor = UIColor.lightGrayColor()
+        thirdModel.tintColor = UIColor.blueColor()
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        modelText.resignFirstResponder()
-        styleText.resignFirstResponder()
         summaryText.resignFirstResponder()
         
         return true
@@ -105,9 +158,9 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     func alamoPOST(){
         
         var parameter = [
-            "model": modelText.text,
+            "model": modelValue,
             "price": "$ " + priceLabelStepper.text! + "0",
-            "style": styleText.text,
+            "style": pickerArray[pickerRowNumber],
             "size": sizeValue,
             "colour": colourValue,
             "summary": summaryText.text]
@@ -155,25 +208,27 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     }
   
     
-    @IBAction func postButton(sender: AnyObject) {
-        alamoPOST()
-        modelText.text = ""
-        cleanParameters()
-        
-    }
-    
     func cleanParameters(){
-        modelText.text = ""
-        styleText.text = ""
+        firstModel.tintColor = UIColor.blueColor()
+        secondModel.tintColor = UIColor.blueColor()
+        thirdModel.tintColor = UIColor.blueColor()
         smallButton.tintColor = UIColor.blueColor()
         mediumButton.tintColor = UIColor.blueColor()
         largeButton.tintColor = UIColor.blueColor()
         redButton.setTitle("Selected", forState: UIControlState.Normal)
+        blueButton.setTitle("", forState: UIControlState.Normal)
         stepperChange.value = 0
         summaryText.text = ""
         
     }
 
+    
+    @IBAction func postButton(sender: AnyObject) {
+        alamoPOST()
+        cleanParameters()
+        
+    }
+ 
 
     
     var imagePicker: UIImagePickerController!
@@ -184,22 +239,53 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         presentViewController(imagePicker, animated: true, completion:nil)
         
     }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-                // Do any additional setup after loading the view.
-    }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         imageCamPicker.image = info[UIImagePickerControllerOriginalImage] as? UIImage
     }
     
+    
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerArray.count
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerArray[row]
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+        return 1
+        
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerRowNumber = row
+    }
+
+    
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        pickerStyleView.dataSource = self
+        pickerStyleView.delegate = self
+   
+        
+        scrollView.contentSize = CGSizeMake(0,1000);
+        // Do any additional setup after loading the view.
+    }
+ 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+  
     
     
     /*

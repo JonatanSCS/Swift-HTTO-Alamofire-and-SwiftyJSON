@@ -70,7 +70,7 @@ class GETViewController: UIViewController {
                         self.priceLabel.text = price
                     let summary = json[self.tableTshirt]["summary"].string
                         self.summaryLabel.text = summary
-                    let modified = json[self.tableTshirt]["summary"].string
+                    let modified = json[self.tableTshirt]["modified"].string
                         self.modifiedLabel.text = modified
                     let image = json[self.tableTshirt]["images"].string
                 

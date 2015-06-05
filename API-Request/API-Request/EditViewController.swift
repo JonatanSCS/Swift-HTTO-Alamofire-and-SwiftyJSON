@@ -1,5 +1,5 @@
 //
-//  PUTViewController.swift
+//  POSTViewController.swift
 //  API
 //
 //  Created by Jonatan Santa Cruz Soria on 15/05/15.
@@ -9,43 +9,76 @@
 import UIKit
 import Alamofire
 
-class EditiewController: UIViewController, UITextFieldDelegate{
-   
-    //TextField
+class EditViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var putErrorLabel: UILabel!
-    @IBOutlet var modelText: UITextField!
-    @IBOutlet var styleText: UITextField!
+    @IBOutlet var activityDeleteindicator: UIActivityIndicatorView!
+    @IBOutlet var imageCamPicker: UIImageView!
     @IBOutlet var summaryText: UITextField!
     @IBOutlet var priceLabelStepper: UILabel!
+   
+    //Picker
+    var pickerArray = ["SWAG", "Geek", "Qué usas?"]
+    var pickerRowNumber = 0
+    @IBOutlet var pickerStyleView: UIPickerView!
     
-    //SizeButtons
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerArray.count
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerArray[row]
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+        return 1
+        
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerRowNumber = row
+    }
+    
+
+    
+    //Model
+    @IBOutlet var firstModel: UIButton!
+    @IBOutlet var secondModel: UIButton!
+    @IBOutlet var thirdModel: UIButton!
+    
+    var modelValue = "2013"
+    
+    @IBAction func firstAction(sender: AnyObject) {
+        modelValue = "2013"
+        firstModel.tintColor = UIColor.blueColor()
+        secondModel.tintColor = UIColor.lightGrayColor()
+        thirdModel.tintColor = UIColor.lightGrayColor()
+        
+    }
+    
+    
+    @IBAction func secondValue(sender: AnyObject) {
+        modelValue = "2014"
+        firstModel.tintColor = UIColor.lightGrayColor()
+        secondModel.tintColor = UIColor.blueColor()
+        thirdModel.tintColor = UIColor.lightGrayColor()
+    }
+    
+    
+    @IBAction func thirdAction(sender: AnyObject) {
+        modelValue = "2015"
+        firstModel.tintColor = UIColor.lightGrayColor()
+        secondModel.tintColor = UIColor.lightGrayColor()
+        thirdModel.tintColor = UIColor.blueColor()
+    }
+
+    
+    //Size
     @IBOutlet var smallButton: UIButton!
     @IBOutlet var mediumButton: UIButton!
     @IBOutlet var largeButton: UIButton!
-    
-    //ColourButtons
-    @IBOutlet var redButton: UIButton!
-    @IBOutlet var blueButton: UIButton!
-    
-    @IBOutlet var stepperUI: UIStepper!
-    
-    
-    var colourValue = "Red"
-    @IBAction func redAction(sender: AnyObject) {
-        redButton.setTitle("Selected", forState: UIControlState.Normal)
-        blueButton.setTitle("", forState: UIControlState.Normal)
-        colourValue = "Red"
-
-    }
-    
-    @IBAction func blueAction(sender: AnyObject) {
-        redButton.setTitle("", forState: UIControlState.Normal)
-        blueButton.setTitle("Selected", forState: UIControlState.Normal)
-        colourValue = "Blue"
-    }
-    
-    
     
     var sizeValue: String = "Small"
     @IBAction func smallAction(sender: AnyObject) {
@@ -68,122 +101,205 @@ class EditiewController: UIViewController, UITextFieldDelegate{
         smallButton.tintColor = UIColor.lightGrayColor()
         sizeValue = "Large"
     }
+
+    //Color
+    @IBOutlet var redButton: UIButton!
+    @IBOutlet var blueButton: UIButton!
     
+    var colourValue = "Red"
+    @IBAction func redAction(sender: AnyObject) {
+        redButton.setTitle("Selected", forState: UIControlState.Normal)
+        blueButton.setTitle("", forState: UIControlState.Normal)
+        colourValue = "Red"
+        
+    }
     
+    @IBAction func blueAction(sender: AnyObject) {
+        redButton.setTitle("", forState: UIControlState.Normal)
+        blueButton.setTitle("Selected", forState: UIControlState.Normal)
+        colourValue = "Blue"
+    }
     
-    
-    @IBAction func priceStepper(sender: UIStepper) {
+    //Stepper
+    @IBOutlet var stepperChange: UIStepper!
+    @IBAction func stepperPrice(sender: UIStepper) {
         if sender.value < 11{
-            
             self.priceLabelStepper.text = sender.value.description
         }
             
         else {
             sender.value = 10
         }
+        
     }
+    
+
+    
+    
+    
+    
     
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        modelText.resignFirstResponder()
-        styleText.resignFirstResponder()
         summaryText.resignFirstResponder()
         
         return true
     }
-
-    func sinPlayeras(){
-        var alert = UIAlertController(title: "Error", message: "Ya no hay playeras en la base de datos", preferredStyle: UIAlertControllerStyle.Alert)
+    //Alerts
+    
+    func playeraEliminada(){
+        var alert = UIAlertController(title: "Playera Eliminada", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
-        self.putErrorLabel.text = "No hay playeras"
-        self.putErrorLabel.textColor = UIColor.blackColor()
+    
     }
+    
+    func exitosoPUT(){
+        var alert = UIAlertController(title: "Edición exitosa", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    
+    }
+    
+    func sinImagen(){
+        var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
     func serverError(){
         var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
-    
+        
     }
     
-    var getIDfromGet: String = ""
-    func alamoPUT() {
-        activityIndicator.startAnimating()
-        //Change to your IP Direction
-        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
-            .responseJSON {(request, response, Tshirts, error) in
-                if Tshirts != nil {
-                    let json = JSON(Tshirts!)
-                    if json.count >= 1 {
-                        let id = json[0]["_id"]
-                        //println(id)
-                        let parameters_put = [
-                            "model": self.modelText.text,
-                            "price": self.priceLabelStepper.text,
-                            "style": self.styleText.text,
-                            "size":  self.sizeValue,
-                            "colour": self.colourValue,
-                            "summary": self.summaryText.text ]
+    
+    var getIDfromGet = ""
+    func alamoPOST(){
         
-                        Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(self.getIDfromGet)", parameters:parameters_put, encoding: .JSON) .responseJSON {
-                            (request, response, JSON, error) in
-                                self.activityIndicator.stopAnimating()
-                           
-                        }
-                    }
-
-                    else {
-                        self.sinPlayeras()
-                        self.activityIndicator.stopAnimating()
-                        
-                    }
+        var parameter = [
+            "model": modelValue,
+            "price": "$ " + priceLabelStepper.text! + "0",
+            "style": pickerArray[pickerRowNumber],
+            "size": sizeValue,
+            "colour": colourValue,
+            "summary": summaryText.text]
+        
+        
+        if imageCamPicker.image == nil {
+            activityIndicator.startAnimating()
+            //Change to your IP Direction
+            Alamofire.request(.PUT, "http://192.168.1.66:3000/tshirt/\(self.getIDfromGet)", parameters:parameter, encoding: .JSON) .responseJSON {
+                (request, response, JSON, error) in
+                self.activityIndicator.stopAnimating()
+                self.sinImagen()
+                //self.exitosoPUT()
+                //self.navigationController?.popToRootViewControllerAnimated(true)
+                
+                if error != nil{
+                    self.serverError()
+                    self.activityIndicator.stopAnimating()
+                    
                 }
-                    
-                    
-                else {
+            }
+            
+            
+        }
+            
+        else {
+            activityIndicator.startAnimating()
+            imageCamPicker.reloadInputViews()
+            
+            var image = imageCamPicker.image!
+            var imageData = UIImagePNGRepresentation(image)
+            let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+            parameter["images"] = base64
+            //Change to your IP Direction
+            Alamofire.request(.PUT, "http://192.168.1.66:3000/tshirt/\(getIDfromGet)", parameters: parameter, encoding: .JSON).responseJSON{
+                (request, response, JSON, error) in
+                self.activityIndicator.stopAnimating()
+                self.exitosoPUT()
+                //self.navigationController?.popToRootViewControllerAnimated(true)
+                
+                
+                
+                if error != nil {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
                 }
+            }
         }
     }
     
     
-    
-    
-    @IBAction func deleteTshirt(sender: AnyObject) {
+    func cleanParameters(){
+        firstModel.tintColor = UIColor.blueColor()
+        secondModel.tintColor = UIColor.blueColor()
+        thirdModel.tintColor = UIColor.blueColor()
+        smallButton.tintColor = UIColor.blueColor()
+        mediumButton.tintColor = UIColor.blueColor()
+        largeButton.tintColor = UIColor.blueColor()
+        redButton.setTitle("Selected", forState: UIControlState.Normal)
+        blueButton.setTitle("", forState: UIControlState.Normal)
+        stepperChange.value = 0
+        summaryText.text = ""
         
-        Alamofire.request(.DELETE, "http://192.168.1.71:3000/tshirt/\(getIDfromGet)")
+    }
+ 
+    
+    @IBAction func alamoPUTButton(sender: AnyObject) {
+        alamoPOST()
+        cleanParameters()
+        
+    }
+    
+    
+    @IBAction func alamoDELETEButton(sender: AnyObject) {
+        activityDeleteindicator.startAnimating()
+        Alamofire.request(.DELETE, "http://192.168.1.66:3000/tshirt/\(getIDfromGet)")
             .responseJSON {(request, response, JSON, error) in
+                self.activityDeleteindicator.stopAnimating()
         }
-        dismissViewController()
-        
+        //navigationController?.popToRootViewControllerAnimated(true)
     }
-    
-    
-    
-    @IBAction func send_PUTbutton(sender: AnyObject) {
-        alamoPUT()
-        dismissViewController()
-        
-    }
-    
-    func dismissViewController() {
-        navigationController?.popToRootViewControllerAnimated(true)
-        
-       
-    }
+  
 
+    var imagePicker: UIImagePickerController!
+    @IBAction func TomarFoto(sender: AnyObject) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .Camera
+        presentViewController(imagePicker, animated: true, completion:nil)
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imageCamPicker.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+    }
+    
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadInputViews()
+        
+        pickerStyleView.dataSource = self
+        pickerStyleView.delegate = self
+        scrollView.contentSize = CGSizeMake(0,1000);
         // Do any additional setup after loading the view.
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     
     /*

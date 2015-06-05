@@ -20,11 +20,19 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+    func sinPlayeras(){
+        var alert = UIAlertController(title: "Error", message: "No hay playeras", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
 
     func tableGetInfo(){
         activityIndicator.startAnimating()
         array = []
-        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
@@ -37,6 +45,9 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                         cuenta++
                     }
                     self.tableView.reloadData()
+                    if self.array.count == 0 {
+                        self.sinPlayeras()
+                    }
                     self.activityIndicator.stopAnimating()
                 }
                     
@@ -45,12 +56,11 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                     self.activityIndicator.stopAnimating()
                 }
         }
-
-    
     }
     
+    
     @IBAction func reloadData(sender: AnyObject) {
-               tableGetInfo()
+        tableGetInfo()
         
     }
     override func viewDidLoad() {
@@ -110,11 +120,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
             // Delete the row from the data source
             array.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            
-            
-            
-            
-            
+
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    

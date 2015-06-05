@@ -10,54 +10,69 @@ import UIKit
 import Alamofire
 
 class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-    //Picker
-    var pickerArray = ["SWAG", "Geek", "Qué usas?"]
-    var pickerRowNumber = 0
-    
-    @IBOutlet var pickerStyleView: UIPickerView!
-    
-  
     
     @IBOutlet var scrollView: UIScrollView!
-    
-    //ModelButton
-    
-    @IBOutlet var firstModel: UIButton!
-    @IBOutlet var secondModel: UIButton!
-    @IBOutlet var thirdModel: UIButton!
-    
-    
-    //TextFields
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var imageCamPicker: UIImageView!
     @IBOutlet var summaryText: UITextField!
     @IBOutlet var priceLabelStepper: UILabel!
+
+    
+    
+    //Picker
+    var pickerArray = ["SWAG", "Geek", "Qué usas?"]
+    var pickerRowNumber = 0
+    @IBOutlet var pickerStyleView: UIPickerView!
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerArray.count
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerArray[row]
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+        return 1
+        
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerRowNumber = row
+    }
+    
+    
+    //ModelButton
+    @IBOutlet var firstModel: UIButton!
+    @IBOutlet var secondModel: UIButton!
+    @IBOutlet var thirdModel: UIButton!
+    
+    var modelValue = "2013"
+    @IBAction func firstAction(sender: AnyObject) {
+        modelValue = "2013"
+        firstModel.tintColor = UIColor.blueColor()
+        secondModel.tintColor = UIColor.lightGrayColor()
+        thirdModel.tintColor = UIColor.lightGrayColor()
+    }
+    
+    @IBAction func secondValue(sender: AnyObject) {
+        modelValue = "2014"
+        firstModel.tintColor = UIColor.lightGrayColor()
+        secondModel.tintColor = UIColor.blueColor()
+        thirdModel.tintColor = UIColor.lightGrayColor()
+    }
+    
+    @IBAction func thirdAction(sender: AnyObject) {
+        modelValue = "2015"
+        firstModel.tintColor = UIColor.lightGrayColor()
+        secondModel.tintColor = UIColor.lightGrayColor()
+        thirdModel.tintColor = UIColor.blueColor()
+    }
     
     //SizeButtons
     @IBOutlet var smallButton: UIButton!
     @IBOutlet var mediumButton: UIButton!
     @IBOutlet var largeButton: UIButton!
-    
-    //ColorButtons
-    @IBOutlet var redButton: UIButton!
-    @IBOutlet var blueButton: UIButton!
-    
-    @IBOutlet var stepperChange: UIStepper!
-    
-    var colourValue = "Red"
-    @IBAction func redAction(sender: AnyObject) {
-        redButton.setTitle("Selected", forState: UIControlState.Normal)
-        blueButton.setTitle("", forState: UIControlState.Normal)
-        colourValue = "Red"
-        
-    }
-    
-    @IBAction func blueAction(sender: AnyObject) {
-        redButton.setTitle("", forState: UIControlState.Normal)
-        blueButton.setTitle("Selected", forState: UIControlState.Normal)
-        colourValue = "Blue"
-    }
-    
     
     var sizeValue: String = "Small"
     @IBAction func smallAction(sender: AnyObject) {
@@ -80,10 +95,28 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         smallButton.tintColor = UIColor.lightGrayColor()
         sizeValue = "Large"
     }
-   
+
+
+    //ColorButtons
+    @IBOutlet var redButton: UIButton!
+    @IBOutlet var blueButton: UIButton!
+    
+    var colourValue = "Red"
+    @IBAction func redAction(sender: AnyObject) {
+        redButton.setTitle("Selected", forState: UIControlState.Normal)
+        blueButton.setTitle("", forState: UIControlState.Normal)
+        colourValue = "Red"
+    }
+    
+    @IBAction func blueAction(sender: AnyObject) {
+        redButton.setTitle("", forState: UIControlState.Normal)
+        blueButton.setTitle("Selected", forState: UIControlState.Normal)
+        colourValue = "Blue"
+    }
     
     
-    
+    //Stepper
+    @IBOutlet var stepperChange: UIStepper!
     @IBAction func stepperPrice(sender: UIStepper) {
         if sender.value < 11{
             self.priceLabelStepper.text = sender.value.description
@@ -94,45 +127,6 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         }
 
     }
-    
-    
-    
-    
-    
-    
-    
-    var modelValue = "2013"
-    
-    @IBAction func firstAction(sender: AnyObject) {
-        modelValue = "2013"
-        firstModel.tintColor = UIColor.blueColor()
-        secondModel.tintColor = UIColor.lightGrayColor()
-        thirdModel.tintColor = UIColor.lightGrayColor()
-        
-    }
-    
-    
-    @IBAction func secondValue(sender: AnyObject) {
-        modelValue = "2014"
-        firstModel.tintColor = UIColor.lightGrayColor()
-        secondModel.tintColor = UIColor.blueColor()
-        thirdModel.tintColor = UIColor.lightGrayColor()
-    }
-    
-    
-    @IBAction func thirdAction(sender: AnyObject) {
-        modelValue = "2015"
-        firstModel.tintColor = UIColor.lightGrayColor()
-        secondModel.tintColor = UIColor.lightGrayColor()
-        thirdModel.tintColor = UIColor.blueColor()
-    }
-
-    
-    
-    
-    
-    
-    
     
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -156,26 +150,22 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     }
     
     func alamoPOST(){
-        
         var parameter = [
             "model": modelValue,
             "price": "$ " + priceLabelStepper.text! + "0",
             "style": pickerArray[pickerRowNumber],
             "size": sizeValue,
             "colour": colourValue,
-            "summary": summaryText.text]
+            "summary": summaryText.text ]
 
         
         if imageCamPicker.image == nil {
             activityIndicator.startAnimating()
              //Change to your IP Direction
-            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.POST, "http://192.168.1.66:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                     self.sinImagen()
                     self.activityIndicator.stopAnimating()
-                
-                
-                
                 if error != nil {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
@@ -194,10 +184,9 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
             parameter["images"] = base64
              //Change to your IP Direction
-            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.POST, "http://192.168.1.66:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
-                
 
                 if error != nil {
                     self.serverError()
@@ -219,18 +208,13 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         blueButton.setTitle("", forState: UIControlState.Normal)
         stepperChange.value = 0
         summaryText.text = ""
-        
     }
-
     
     @IBAction func postButton(sender: AnyObject) {
         alamoPOST()
         cleanParameters()
-        
     }
- 
 
-    
     var imagePicker: UIImagePickerController!
     @IBAction func TomarFoto(sender: AnyObject) {
         imagePicker = UIImagePickerController()
@@ -244,28 +228,6 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         imageCamPicker.image = info[UIImagePickerControllerOriginalImage] as? UIImage
     }
-    
-    
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerArray.count
-    }
-    
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerArray[row]
-    }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
-        return 1
-        
-    }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerRowNumber = row
-    }
-
-    
-    
     
     
     override func viewDidLoad() {

@@ -23,7 +23,6 @@ class GETViewController: UIViewController {
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var modifiedLabel: UILabel!
     
-    //tableTshir get its value from IdTableViewController
     
     func sinImagen(){
         self.imageCam.image = UIImage(named: "Unknown.png")
@@ -37,20 +36,30 @@ class GETViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    func noExiste(){
+        var alert = UIAlertController(title: "Error", message: "Ya no existe esta playera", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     
     
     var tableTshirt: Int = 0
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
-        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
+                    
                 
                     let id = json[self.tableTshirt]["_id"].string
                         self.idLabel.text = id
+                        if id == nil {
+                            self.noExiste()
+                        }
                     let model = json[self.tableTshirt]["model"].string
                         self.modelLabel.text = model
                     let style = json[self.tableTshirt]["style"].string
@@ -65,7 +74,6 @@ class GETViewController: UIViewController {
                             else {
                                 self.colourLabel.textColor = UIColor.blueColor()
                             }
-                    
                     let price = json[self.tableTshirt]["price"].string
                         self.priceLabel.text = price
                     let summary = json[self.tableTshirt]["summary"].string
@@ -104,8 +112,9 @@ class GETViewController: UIViewController {
         alamoGET()
     }
     
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var nextScene = segue.destinationViewController as! EditiewController
+        var nextScene = segue.destinationViewController as! EditViewController
             var getIDfromLabel = idLabel.text
             nextScene.getIDfromGet = getIDfromLabel!
         
@@ -114,9 +123,7 @@ class GETViewController: UIViewController {
     
     override func viewDidLoad() {
         alamoGET()
-        println(tableTshirt)
-        
-        
+
               // Do any additional setup after loading the view.
     }
     

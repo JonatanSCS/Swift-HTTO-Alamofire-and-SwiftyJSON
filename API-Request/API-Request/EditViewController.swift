@@ -132,13 +132,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         }
         
     }
-    
 
-    
-    
-    
-    
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         summaryText.resignFirstResponder()
@@ -146,27 +140,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         return true
     }
     //Alerts
-    
-    func playeraEliminada(){
-        var alert = UIAlertController(title: "Playera Eliminada", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    
-    }
-    
-    func exitosoPUT(){
-        var alert = UIAlertController(title: "Edición exitosa", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    
-    }
-    
-    func sinImagen(){
-        var alert = UIAlertController(title: "No se tomó fotografía", message: "No habrá imagen disponible", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
     
     func serverError(){
         var alert = UIAlertController(title: "Error", message: "No se puede hacer contacto con el servidor", preferredStyle: UIAlertControllerStyle.Alert)
@@ -177,7 +150,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
     
     
     var getIDfromGet = ""
-    func alamoPOST(){
+    func alamoPUT(){
         
         var parameter = [
             "model": modelValue,
@@ -191,12 +164,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         if imageCamPicker.image == nil {
             activityIndicator.startAnimating()
             //Change to your IP Direction
-            Alamofire.request(.PUT, "http://192.168.1.66:3000/tshirt/\(self.getIDfromGet)", parameters:parameter, encoding: .JSON) .responseJSON {
+            Alamofire.request(.PUT, "http://192.168.1.67:3000/tshirt/\(self.getIDfromGet)", parameters:parameter, encoding: .JSON) .responseJSON {
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
-                self.sinImagen()
-                //self.exitosoPUT()
-                //self.navigationController?.popToRootViewControllerAnimated(true)
                 
                 if error != nil{
                     self.serverError()
@@ -217,14 +187,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
             parameter["images"] = base64
             //Change to your IP Direction
-            Alamofire.request(.PUT, "http://192.168.1.66:3000/tshirt/\(getIDfromGet)", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.PUT, "http://192.168.1.67:3000/tshirt/\(getIDfromGet)", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
-                self.exitosoPUT()
-                //self.navigationController?.popToRootViewControllerAnimated(true)
-                
-                
-                
+
                 if error != nil {
                     self.serverError()
                     self.activityIndicator.stopAnimating()
@@ -250,19 +216,19 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
  
     
     @IBAction func alamoPUTButton(sender: AnyObject) {
-        alamoPOST()
+        alamoPUT()
         cleanParameters()
-        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
     @IBAction func alamoDELETEButton(sender: AnyObject) {
         activityDeleteindicator.startAnimating()
-        Alamofire.request(.DELETE, "http://192.168.1.66:3000/tshirt/\(getIDfromGet)")
+        Alamofire.request(.DELETE, "http://192.168.1.67:3000/tshirt/\(getIDfromGet)")
             .responseJSON {(request, response, JSON, error) in
                 self.activityDeleteindicator.stopAnimating()
         }
-        //navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
   
 
@@ -280,13 +246,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         imageCamPicker.image = info[UIImagePickerControllerOriginalImage] as? UIImage
     }
     
-    
-
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         pickerStyleView.dataSource = self
         pickerStyleView.delegate = self
         scrollView.contentSize = CGSizeMake(0,1000);

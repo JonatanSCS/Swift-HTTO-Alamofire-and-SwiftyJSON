@@ -40,33 +40,34 @@ class GETViewController: UIViewController {
         var alert = UIAlertController(title: "Error", message: "Ya no existe esta playera", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
     
-    var tableTshirt: Int = 0
+    var tableTshirt =  ""
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
-        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.67:3000/tshirt/\(tableTshirt)")
             .responseJSON {(request, response, Tshirts, error) in
-                
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
                     
-                
-                    let id = json[self.tableTshirt]["_id"].string
+                    let tshirt = json["tshirt"]
+                    let id = tshirt["_id"].string
                         self.idLabel.text = id
                         if id == nil {
                             self.noExiste()
+                            self.navigationController?.popViewControllerAnimated(true)
                         }
-                    let model = json[self.tableTshirt]["model"].string
+                    let model = tshirt["model"].string
                         self.modelLabel.text = model
-                    let style = json[self.tableTshirt]["style"].string
+                    let style = tshirt["style"].string
                         self.styleLabel.text = style
-                    let size = json[self.tableTshirt]["size"].string
+                    let size = tshirt["size"].string
                         self.sizeLabel.text = size
-                    let colour = json[self.tableTshirt]["colour"].string
+                    let colour = tshirt["colour"].string
                         self.colourLabel.text = colour
                             if colour == "Red" {
                                 self.colourLabel.textColor = UIColor.redColor()
@@ -74,16 +75,14 @@ class GETViewController: UIViewController {
                             else {
                                 self.colourLabel.textColor = UIColor.blueColor()
                             }
-                    let price = json[self.tableTshirt]["price"].string
+                    let price = tshirt["price"].string
                         self.priceLabel.text = price
-                    let summary = json[self.tableTshirt]["summary"].string
+                    let summary = tshirt["summary"].string
                         self.summaryLabel.text = summary
-                    let modified = json[self.tableTshirt]["modified"].string
+                    let modified = tshirt["modified"].string
                         self.modifiedLabel.text = modified
-                    let image = json[self.tableTshirt]["images"].string
+                    let image = tshirt["images"].string
                 
-                    
-                    
                     if image != nil {
                         let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
                         var decodedIamge = UIImage(data: decodedData!)
@@ -107,7 +106,6 @@ class GETViewController: UIViewController {
     }
 
     
-    
     @IBAction func refresInfoView(sender: AnyObject) {
         alamoGET()
     }
@@ -121,9 +119,16 @@ class GETViewController: UIViewController {
     }
     
     
-    override func viewDidLoad() {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
         alamoGET()
-
+    }
+    
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
               // Do any additional setup after loading the view.
     }
     

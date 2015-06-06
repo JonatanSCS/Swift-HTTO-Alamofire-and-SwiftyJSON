@@ -30,9 +30,10 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
     
 
     func tableGetInfo(){
+        
         activityIndicator.startAnimating()
         array = []
-        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.67:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
@@ -63,16 +64,19 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         tableGetInfo()
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        tableGetInfo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableGetInfo()
-        
     }
 
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+       
         // Dispose of any resources that can be recreated.
     }
 
@@ -130,8 +134,8 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         var nextScene = segue.destinationViewController as! GETViewController
         
         if let indexPath = self.tableView.indexPathForSelectedRow(){
-            var tshirt = indexPath.row
-            nextScene.tableTshirt = tshirt
+            var nuevoID = self.array[indexPath.row] as? String
+            nextScene.tableTshirt = nuevoID!
         }
     }
     

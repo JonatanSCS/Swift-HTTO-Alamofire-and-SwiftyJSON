@@ -33,7 +33,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         
         activityIndicator.startAnimating()
         array = []
-        Alamofire.request(.GET, "http://192.168.1.67:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)

@@ -164,7 +164,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         if imageCamPicker.image == nil {
             activityIndicator.startAnimating()
             //Change to your IP Direction
-            Alamofire.request(.PUT, "http://192.168.1.67:3000/tshirt/\(self.getIDfromGet)", parameters:parameter, encoding: .JSON) .responseJSON {
+            Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(self.getIDfromGet)", parameters:parameter, encoding: .JSON) .responseJSON {
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
                 
@@ -187,7 +187,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
             parameter["images"] = base64
             //Change to your IP Direction
-            Alamofire.request(.PUT, "http://192.168.1.67:3000/tshirt/\(getIDfromGet)", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.PUT, "http://192.168.1.71:3000/tshirt/\(getIDfromGet)", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
 

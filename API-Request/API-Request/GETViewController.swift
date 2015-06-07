@@ -21,7 +21,6 @@ class GETViewController: UIViewController {
     @IBOutlet var colourLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var summaryLabel: UILabel!
-    @IBOutlet var modifiedLabel: UILabel!
     
     
     func sinImagen(){
@@ -49,7 +48,7 @@ class GETViewController: UIViewController {
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
-        Alamofire.request(.GET, "http://192.168.1.67:3000/tshirt/\(tableTshirt)")
+        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirt/\(tableTshirt)")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
@@ -79,10 +78,7 @@ class GETViewController: UIViewController {
                         self.priceLabel.text = price
                     let summary = tshirt["summary"].string
                         self.summaryLabel.text = summary
-                    let modified = tshirt["modified"].string
-                        self.modifiedLabel.text = modified
                     let image = tshirt["images"].string
-                
                     if image != nil {
                         let decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions(rawValue: 0))
                         var decodedIamge = UIImage(data: decodedData!)
@@ -126,9 +122,71 @@ class GETViewController: UIViewController {
     
     
     
+    func ifimageSeleceted(){
+        colourLabel.textColor = UIColor.blackColor()
+        idLabel.textColor = UIColor.blackColor()
+        modelLabel.textColor = UIColor.blackColor()
+        sizeLabel.textColor = UIColor.blackColor()
+        styleLabel.textColor = UIColor.blackColor()
+        priceLabel.textColor = UIColor.blackColor()
+        summaryLabel.textColor = UIColor.blackColor()
+        
+    }
+    func ifimageDeSeleceted(){
+        colourLabel.textColor = UIColor.blueColor()
+        idLabel.textColor = UIColor.blueColor()
+        modelLabel.textColor = UIColor.blueColor()
+        sizeLabel.textColor = UIColor.blueColor()
+        styleLabel.textColor = UIColor.blueColor()
+        priceLabel.textColor = UIColor.blueColor()
+        summaryLabel.textColor = UIColor.blueColor()
+       
+    }
+
+    
+    
+    
+    @IBOutlet var backViewGET: UIView!
+    @IBOutlet var regresarButton: UIButton!
+    
+    var statusImage: Bool = false
+    @IBAction func regresarImageButton(sender: AnyObject) {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        let duration = 1.0
+        
+        if statusImage == false {
+            UIView.animateWithDuration(duration, animations: {
+                self.imageCam.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0)
+                self.imageCam.frame = CGRect(x: screenWidth/4, y: screenHeight/4, width: screenWidth/2, height: screenHeight/3)
+                self.regresarButton.setTitle("Regresar", forState: UIControlState.Normal)
+                self.backViewGET.backgroundColor = UIColor.blackColor()
+                self.ifimageSeleceted()
+            })
+            statusImage = true
+        }
+        
+        else {
+            UIView.animateWithDuration(duration, animations: {
+                self.imageCam.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0)
+                self.imageCam.frame = CGRect(x: 30, y: 445, width:240, height: 121)
+                self.regresarButton.setTitle("", forState: UIControlState.Normal)
+                self.backViewGET.backgroundColor = UIColor.whiteColor()
+                self.ifimageDeSeleceted()
+            })
+            
+            statusImage = false
+        }
+    }
+    
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
               // Do any additional setup after loading the view.
     }
     

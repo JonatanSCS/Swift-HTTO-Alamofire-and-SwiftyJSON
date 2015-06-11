@@ -42,9 +42,14 @@ class GETViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    
-    
     var tableTshirt =  ""
+    var tableModel = ""
+    var tableStyle = ""
+    var tableSize = ""
+    var tableColour = ""
+    var tablePrice = ""
+    var tableSummary = ""
+    
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
@@ -52,7 +57,6 @@ class GETViewController: UIViewController {
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
-                    
                     let tshirt = json["tshirt"]
                     let id = tshirt["_id"].string
                         self.idLabel.text = id
@@ -74,6 +78,7 @@ class GETViewController: UIViewController {
                             else {
                                 self.colourLabel.textColor = UIColor.blueColor()
                             }
+                    
                     let price = tshirt["price"].string
                         self.priceLabel.text = price
                     let summary = tshirt["summary"].string
@@ -85,7 +90,7 @@ class GETViewController: UIViewController {
                             self.imageCam.image = decodedIamge
                         self.activityIndicator.stopAnimating()
                     }
-                
+        
                     else {
                         self.imageCam.image = UIImage(named: "Unknown.png")
                          self.activityIndicator.stopAnimating()
@@ -95,7 +100,13 @@ class GETViewController: UIViewController {
                 
                 else {
                     self.idLabel.text = self.tableTshirt
-                    self.serverError()
+                    self.modelLabel.text = self.tableModel
+                    self.styleLabel.text = self.tableStyle
+                    self.sizeLabel.text = self.tableSize
+                    self.colourLabel.text = self.tableColour
+                    self.priceLabel.text = self.tablePrice
+                    self.summaryLabel.text = self.tableSummary
+                    //self.serverError()
                     self.activityIndicator.stopAnimating()
 
                 }
@@ -145,8 +156,6 @@ class GETViewController: UIViewController {
     }
 
     
-    
-    
     @IBOutlet var backViewGET: UIView!
     @IBOutlet var regresarButton: UIButton!
     
@@ -182,12 +191,9 @@ class GETViewController: UIViewController {
     }
     
     
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
               // Do any additional setup after loading the view.
     }
     

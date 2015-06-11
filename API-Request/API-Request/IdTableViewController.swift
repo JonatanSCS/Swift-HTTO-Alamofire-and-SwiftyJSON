@@ -13,7 +13,13 @@ import CoreData
 class IdTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
     var array: Array <AnyObject> = []
-    var arrayCore: Array <String> = []
+    var arrayCoreID: Array <String> = []
+    var arrayCoreModel: Array <String> = []
+    var arrayCoreStyle: Array <String> = []
+    var arrayCoreSize: Array <String> = []
+    var arrayCoreColour: Array <String> = []
+    var arrayCorePrice: Array <String> = []
+    var arrayCoreSummary: Array <String> = []
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     func serverError(){
@@ -46,17 +52,39 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                     var cuenta = 0
                     for tshirt in tshirts {
                         var nuevoID = json[cuenta]["_id"].string
+                        var nuevoModel = json[cuenta]["model"].string
+                        var nuevoStyle = json[cuenta]["style"].string
+                        var nuevoSize = json[cuenta]["size"].string
+                        var nuevoColour = json[cuenta]["colour"].string
+                        var nuevoPrice = json[cuenta]["price"].string
+                        var nuevoSummary = json[cuenta]["summary"].string
+                        
                         self.array.append(nuevoID!)
-                        var buscar = find(self.arrayCore, nuevoID!)
+                        var buscar = find(self.arrayCoreID, nuevoID!)
     
                         if buscar == nil {
                             newUser.setValue(nuevoID, forKey: "id")
+                            newUser.setValue(nuevoModel, forKey: "model")
+                            newUser.setValue(nuevoStyle, forKey: "style")
+                            newUser.setValue(nuevoSize, forKey: "size")
+                            newUser.setValue(nuevoColour, forKey: "colour")
+                            newUser.setValue(nuevoPrice, forKey: "price")
+                            newUser.setValue(nuevoSummary, forKey: "summary")
                             context.save(nil)
-                            self.arrayCore.append(nuevoID!)
+                            
+                            self.arrayCoreID.append(nuevoID!)
+                            self.arrayCoreModel.append(nuevoModel!)
+                            self.arrayCoreStyle.append(nuevoStyle!)
+                            self.arrayCoreSize.append(nuevoSize!)
+                            self.arrayCoreColour.append(nuevoColour!)
+                            self.arrayCorePrice.append(nuevoPrice!)
+                            self.arrayCoreSummary.append(nuevoSummary!)
                         }
+                            
                         else {
                             println("Ya existe")
                         }
+
                         cuenta++
                     }
                     self.tableView.reloadData()
@@ -88,7 +116,16 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         }
     }
     func reloadCoreData(){
-        arrayCore = []
+
+        arrayCoreID = []
+        arrayCoreModel = []
+        arrayCoreStyle = []
+        arrayCoreSize = []
+        arrayCoreColour = []
+        arrayCorePrice = []
+        arrayCoreSummary = []
+
+
         var appDel:AppDelegate = {UIApplication.sharedApplication().delegate as! AppDelegate}()
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         var request = NSFetchRequest(entityName: "Tshirt")
@@ -100,8 +137,22 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                 //
             }
             else {
-                var requestIDnotnil = res.valueForKey("id") as! String
-                self.arrayCore.append(requestIDnotnil)
+                var requestID = res.valueForKey("id") as! String
+                var requestModel = res.valueForKey("model") as! String
+                var requestStyle = res.valueForKey("style") as! String
+                var requestSize = res.valueForKey("size") as! String
+                var requestColour = res.valueForKey("colour") as! String
+                var requestPrice = res.valueForKey("price") as! String
+                var requestSummary = res.valueForKey("summary") as! String
+                
+                self.arrayCoreID.append(requestID)
+                self.arrayCoreModel.append(requestModel)
+                self.arrayCoreStyle.append(requestStyle)
+                self.arrayCoreSize.append(requestSize)
+                self.arrayCoreColour.append(requestColour)
+                self.arrayCorePrice.append(requestPrice)
+                self.arrayCoreSummary.append(requestSummary)
+                
             }
         }
     }
@@ -183,8 +234,22 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         
         
         if let indexPath = self.tableView.indexPathForSelectedRow(){
-            var nuevoID = self.array[indexPath.row] as? String
-            nextScene.tableTshirt = nuevoID!
+            var nuevoID = self.arrayCoreID[indexPath.row]
+            var nuevoModel = self.arrayCoreModel[indexPath.row]
+            var nuevoStyle = self.arrayCoreStyle[indexPath.row]
+            var nuevoSize = self.arrayCoreSize[indexPath.row]
+            var nuevoColour = self.arrayCoreColour[indexPath.row]
+            var nuevoPrice = self.arrayCorePrice[indexPath.row]
+            var nuevoSummary = self.arrayCoreSummary[indexPath.row]
+            
+            nextScene.tableTshirt = nuevoID
+            nextScene.tableModel = nuevoModel
+            nextScene.tableStyle = nuevoStyle
+            nextScene.tableSize = nuevoSize
+            nextScene.tableColour = nuevoColour
+            nextScene.tablePrice = nuevoPrice
+            nextScene.tableSummary = nuevoSummary
+
         }
     }
     

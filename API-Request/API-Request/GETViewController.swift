@@ -48,7 +48,7 @@ class GETViewController: UIViewController {
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
-        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirt/\(tableTshirt)")
+        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirt/\(tableTshirt)")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
@@ -94,6 +94,7 @@ class GETViewController: UIViewController {
                 }
                 
                 else {
+                    self.idLabel.text = self.tableTshirt
                     self.serverError()
                     self.activityIndicator.stopAnimating()
 

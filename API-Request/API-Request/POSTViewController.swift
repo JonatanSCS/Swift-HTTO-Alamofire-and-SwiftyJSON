@@ -161,7 +161,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         if imageCamPicker.image == nil {
             activityIndicator.startAnimating()
              //Change to your IP Direction
-            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.POST, "http://192.168.1.66:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                     self.sinImagen()
                     self.activityIndicator.stopAnimating()
@@ -183,7 +183,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
             let base64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
             parameter["images"] = base64
              //Change to your IP Direction
-            Alamofire.request(.POST, "http://192.168.1.71:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.POST, "http://192.168.1.66:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                 self.activityIndicator.stopAnimating()
 

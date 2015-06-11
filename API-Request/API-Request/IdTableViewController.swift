@@ -8,10 +8,12 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 class IdTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
     var array: Array <AnyObject> = []
+    var arrayCore: Array <String> = []
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     func serverError(){
@@ -33,16 +35,28 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         
         activityIndicator.startAnimating()
         array = []
-        Alamofire.request(.GET, "http://192.168.1.71:3000/tshirts")
+        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
+                var appDel:AppDelegate = {UIApplication.sharedApplication().delegate as! AppDelegate}()
+                var context:NSManagedObjectContext = appDel.managedObjectContext!
+                var newUser: AnyObject = NSEntityDescription.insertNewObjectForEntityForName("Tshirt", inManagedObjectContext: context) as! NSManagedObject
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)
                     var tshirts = json
                     var cuenta = 0
-                    
                     for tshirt in tshirts {
                         var nuevoID = json[cuenta]["_id"].string
                         self.array.append(nuevoID!)
+                        var buscar = find(self.arrayCore, nuevoID!)
+    
+                        if buscar == nil {
+                            newUser.setValue(nuevoID, forKey: "id")
+                            context.save(nil)
+                            self.arrayCore.append(nuevoID!)
+                        }
+                        else {
+                            println("Ya existe")
+                        }
                         cuenta++
                     }
                     self.tableView.reloadData()
@@ -53,21 +67,55 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
                 }
                     
                 else {
-                    self.serverError()
+                    var request = NSFetchRequest(entityName: "Tshirt")
+                    request.returnsObjectsAsFaults = false
+                    var results:NSArray = context.executeFetchRequest(request, error: nil)!
+                    for res in results {
+                        var requestID: AnyObject? = res.valueForKey("id")
+                        if requestID == nil {
+                            
+                        }
+                        else {
+                            var requestIDnotnil = res.valueForKey("id") as! String
+                            self.array.append(requestIDnotnil)
+                        }
+                        self.tableView.reloadData()
+                    }
+
+                    //self.serverError()
                     self.activityIndicator.stopAnimating()
                 }
         }
     }
-    
+    func reloadCoreData(){
+        arrayCore = []
+        var appDel:AppDelegate = {UIApplication.sharedApplication().delegate as! AppDelegate}()
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        var request = NSFetchRequest(entityName: "Tshirt")
+        request.returnsObjectsAsFaults = false
+        var results:NSArray = context.executeFetchRequest(request, error: nil)!
+        for res in results {
+            var requestID: AnyObject? = res.valueForKey("id")
+            if requestID == nil {
+                //
+            }
+            else {
+                var requestIDnotnil = res.valueForKey("id") as! String
+                self.arrayCore.append(requestIDnotnil)
+            }
+        }
+    }
     
     @IBAction func reloadData(sender: AnyObject) {
         tableGetInfo()
+        reloadCoreData()
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         tableGetInfo()
+        reloadCoreData()
     }
     
     override func viewDidLoad() {
@@ -132,6 +180,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var nextScene = segue.destinationViewController as! GETViewController
+        
         
         if let indexPath = self.tableView.indexPathForSelectedRow(){
             var nuevoID = self.array[indexPath.row] as? String

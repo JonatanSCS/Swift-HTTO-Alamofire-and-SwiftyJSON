@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import CoreData
+import SwiftyJSON
 
 class IdTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -41,7 +42,7 @@ class IdTableViewController: UITableViewController, UITableViewDataSource, UITab
         
         activityIndicator.startAnimating()
         array = []
-        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirts")
+        Alamofire.request(.GET, "http://localhost:3000/tshirts")
             .responseJSON {(request, response, Tshirts, error) in
                 var appDel:AppDelegate = {UIApplication.sharedApplication().delegate as! AppDelegate}()
                 var context:NSManagedObjectContext = appDel.managedObjectContext!

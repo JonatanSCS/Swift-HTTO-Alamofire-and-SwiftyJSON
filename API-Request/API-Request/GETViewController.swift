@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 
 class GETViewController: UIViewController {
@@ -53,7 +54,7 @@ class GETViewController: UIViewController {
     func alamoGET() {
         activityIndicator.startAnimating()
         //Change to your IP Direction
-        Alamofire.request(.GET, "http://192.168.1.66:3000/tshirt/\(tableTshirt)")
+        Alamofire.request(.GET, "http://localhost:3000/tshirt/\(tableTshirt)")
             .responseJSON {(request, response, Tshirts, error) in
                 if Tshirts != nil {
                     let json = JSON(Tshirts!)

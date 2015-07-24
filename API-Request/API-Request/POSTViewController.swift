@@ -161,7 +161,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
         if imageCamPicker.image == nil {
             activityIndicator.startAnimating()
              //Change to your IP Direction
-            Alamofire.request(.POST, "http://192.168.1.66:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
+            Alamofire.request(.POST, "http://localhost:3000/tshirt", parameters: parameter, encoding: .JSON).responseJSON{
                 (request, response, JSON, error) in
                     self.sinImagen()
                     self.activityIndicator.stopAnimating()
@@ -193,7 +193,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate, UINavigationCon
                 }
             }
         }
-        navigationController?.popViewControllerAnimated(true)
+        //navigationController?.popViewControllerAnimated(true)
         
     }
   
